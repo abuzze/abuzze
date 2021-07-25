@@ -1,0 +1,4 @@
+baseURL = "https://blog.om.de/"
+languageCode = "en-us"
+title = "Memoirs of a sysadmin"
+theme = "book"
