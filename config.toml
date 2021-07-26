@@ -2,3 +2,23 @@ baseURL = "https://blog.om.de/"
 languageCode = "en-us"
 title = "Memoirs of a sysadmin"
 theme = "book"
+[params]
+  BookMenuBundle = "/menu"
+  # (Optional, default docs) Specify section of content to render as menu
+  # You can also set value to "*" to render all sections to menu
+  BookSection = 'docs'
+  # (Optional, default January 2, 2006) Configure the date format used on the pages
+  # - In git information
+  # - In blog posts
+  BookDateFormat = '2 Jan, 2006'
+
+[menu]
+[[menu.before]]
+  name = "Github"
+  url = "https://github.com/abuzze"
+  weight = 10
+
+[[menu.after]]
+  name = "Hugo Themes"
+  url = "https://themes.gohugo.io/hugo-book/"
+  weight = 20
