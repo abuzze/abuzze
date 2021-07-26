@@ -1,0 +1,357 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Cisco Cheatsheet #  Enable SSH login on a Catalyst 3850 #  configure terminal hostname name ip domain-name name crypto key generate rsa ip ssh [time-out seconds | authentication-r etries integer ] ip ssh version 2 line vty 5 15 exec-timeout 15 0 transport input ssh access-class authorized-managers in ! ip access-list extended authorized-managers permit ip 172.25.0.0 0.0.255.255 any permit ip host 172.20.3.195 any permit ip host 172.20.1.133 any Check this when setting up new switches.">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Cisco Cheatsheet">
+<meta property="og:description" content="Cisco Cheatsheet #  Enable SSH login on a Catalyst 3850 #  configure terminal hostname name ip domain-name name crypto key generate rsa ip ssh [time-out seconds | authentication-r etries integer ] ip ssh version 2 line vty 5 15 exec-timeout 15 0 transport input ssh access-class authorized-managers in ! ip access-list extended authorized-managers permit ip 172.25.0.0 0.0.255.255 any permit ip host 172.20.3.195 any permit ip host 172.20.1.133 any Check this when setting up new switches.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.om.de/docs/cisco/"><meta property="article:section" content="docs">
+<title>Cisco Cheatsheet | Memoirs of a sysadmin</title>
+<link rel=manifest href=/manifest.json>
+<link rel=icon href=/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+<script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.f8d1f028cc09d07e2ab160f8f6576a9ecadcd41b3c48697e514b8a523da27ccb.js integrity="sha256-+NHwKMwJ0H4qsWD49ldqnsrc1Bs8SGl+UUuKUj2ifMs=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/><span>Memoirs of a sysadmin</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://github.com/abuzze target=_blank rel=noopener>
+Github
+</a>
+</li>
+</ul>
+<ul>
+<li><a href=/docs/>Cheatsheets</a>
+<ul>
+<li><a href=/docs/cheat-sheet/>Arduino</a></li>
+<li><a href=/docs/active-directory/>Active Directory</a></li>
+<li><a href=/docs/cisco/ class=active>Cisco</a></li>
+<li><a href=/docs/docker/>Docker</a></li>
+<li><a href=/docs/git/>Git</a></li>
+<li><a href=/docs/juniper/>Juniper</a></li>
+<li><a href=/docs/k8s/>k8s</a></li>
+<li><a href=/docs/linux/>Linux</a></li>
+<li><a href=/docs/lxc/>LXC</a></li>
+<li><a href=/docs/macos/>MacOS</a></li>
+<li><a href=/docs/mongodb/>MongoDB</a></li>
+<li><a href=/docs/python/>Python</a></li>
+<li><a href=/docs/ruby-setup/>Ruby</a></li>
+</ul>
+</li>
+<li><a href=/posts/>Blog</a></li>
+</ul>
+<ul>
+<li>
+<a href=https://themes.gohugo.io/hugo-book/ target=_blank rel=noopener>
+Hugo Themes
+</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Cisco Cheatsheet</strong>
+<label for=toc-control>
+<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#enable-ssh-login-on-a-catalyst-3850>Enable SSH login on a Catalyst 3850</a></li>
+<li><a href=#check-this-when-setting-up-new-switches>Check this when setting up new switches.</a>
+<ul>
+<li><a href=#editing-acls>Editing ACLs</a></li>
+</ul>
+</li>
+<li><a href=#sdm>SDM</a></li>
+<li><a href=#spanning-tree>Spanning Tree</a>
+<ul>
+<li><a href=#stp>STP</a></li>
+<li><a href=#loopguard>Loopguard</a></li>
+<li><a href=#unidirectionallinkdetection---udld>UniDirectionalLinkDetection - UDLD</a></li>
+</ul>
+</li>
+<li><a href=#vtp>VTP</a></li>
+<li><a href=#link-aggregation>Link Aggregation</a></li>
+<li><a href=#ntp>NTP</a></li>
+<li><a href=#snmpv3>SNMPv3</a></li>
+<li><a href=#ip-sla>IP SLA</a></li>
+<li><a href=#storm-control>Storm control</a></li>
+<li><a href=#port-security>Port-Security</a></li>
+<li><a href=#dhcp-spoofing>DHCP Spoofing</a>
+<ul>
+<li><a href=#dynamic-arp-inspection>Dynamic ARP Inspection</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=cisco-cheatsheet>
+Cisco Cheatsheet
+<a class=anchor href=#cisco-cheatsheet>#</a>
+</h1>
+<h2 id=enable-ssh-login-on-a-catalyst-3850>
+Enable SSH login on a Catalyst 3850
+<a class=anchor href=#enable-ssh-login-on-a-catalyst-3850>#</a>
+</h2>
+<pre><code>configure terminal
+hostname name
+ip domain-name name
+crypto key generate rsa
+ip ssh [time-out seconds | authentication-r etries integer ]
+ip ssh version 2
+line vty 5 15
+exec-timeout 15 0
+transport input ssh
+access-class authorized-managers in
+!
+ip access-list extended authorized-managers
+permit ip 172.25.0.0 0.0.255.255 any
+permit ip host 172.20.3.195 any
+permit ip host 172.20.1.133 any
+</code></pre><h2 id=check-this-when-setting-up-new-switches>
+Check this when setting up new switches.
+<a class=anchor href=#check-this-when-setting-up-new-switches>#</a>
+</h2>
+<p>cisco password change</p>
+<pre><code>enable secret new_password
+</code></pre><p>enable logging to syslogserver:</p>
+<pre><code>logging ip_syslogserver
+</code></pre><p>disable vtp mode</p>
+<pre><code>vtp off
+</code></pre><p>If you use Portchanels, verify at least on side is active not &ldquo;on&rdquo;</p>
+<pre><code>channelgroup 1 mode active
+</code></pre><pre><code>conf t
+interface fa 0/1
+switchport access vlan 1
+
+</code></pre><h3 id=editing-acls>
+Editing ACLs
+<a class=anchor href=#editing-acls>#</a>
+</h3>
+<p>Note the line numbering in the required access-list e.g.:
+1
+2
+3
+4</p>
+<pre><code>extended IP access-list 115
+   10 access-list 115 deny ip host 222.222.222.222 any
+   20 access-list 115 permit ip any any
+</code></pre><p>Then enter config mode and insert the line you want to add, prefixing it with the appropriate number to position it where you want in the list (substitute standard for extended in the example below if you are working with a standard ACL):</p>
+<p>1
+2
+3
+4
+5</p>
+<pre><code>conf t
+ip access-list extended 115
+15 deny ip host 111.111.111.111 any
+end
+</code></pre><h2 id=sdm>
+SDM
+<a class=anchor href=#sdm>#</a>
+</h2>
+<pre><code>sdm prefer
+
+sh plattform tcam util
+</code></pre><h2 id=spanning-tree>
+Spanning Tree
+<a class=anchor href=#spanning-tree>#</a>
+</h2>
+<h3 id=stp>
+STP
+<a class=anchor href=#stp>#</a>
+</h3>
+<p>Changing Root Prio is possible via two ways</p>
+<pre><code>  spanning-tree vlan vlan-id priority bridge-priority
+</code></pre><p>Changing root bridge via macro. Sets prio to 24576 if current root prio is above that value, or to 4096 if below.</p>
+<pre><code>  spanning-tree vlan vlan-id root primary
+</code></pre><h3 id=loopguard>
+Loopguard
+<a class=anchor href=#loopguard>#</a>
+</h3>
+<p>LG prevents Loop, with unidirectional links (broken SFPs)</p>
+<p>Rootguard cannot be enable on the same port as Loopguard. Loopguard would disable Rootguard on the port.</p>
+<h3 id=unidirectionallinkdetection---udld>
+UniDirectionalLinkDetection - UDLD
+<a class=anchor href=#unidirectionallinkdetection---udld>#</a>
+</h3>
+<p>Detects if only one fibre strand is connected</p>
+<p>udld aggressive mode try to reenable the link, while normal mode just err-disables the port.</p>
+<p>Global config all ports</p>
+<pre><code>  udld enable | aggressive
+</code></pre><p>Config per port</p>
+<pre><code>  udld port
+</code></pre><p>Verify config</p>
+<pre><code>  show udld
+</code></pre><p>Reset err-disabled ports</p>
+<pre><code>  udld reset
+</code></pre><h2 id=vtp>
+VTP
+<a class=anchor href=#vtp>#</a>
+</h2>
+<p>Pruefungsfrage
+1-1001 (VTP1,2,3)
+1002-1005 FDDI/Token Ring
+extended VLAN 1006-4094 (VTP3)</p>
+<p>Unterschiede VTP Versionen</p>
+<ul>
+<li>VTP3 lernt nicht automatisch den Domainnamen
+VTP Pruning sorgt dafuer das Switches, deren Mgmt VLAN verschieden ist keine VTP Daten uebertragen.</li>
+</ul>
+<h2 id=link-aggregation>
+Link Aggregation
+<a class=anchor href=#link-aggregation>#</a>
+</h2>
+<p>Static und Dynamic sind miteinander nicht kompatibel</p>
+<p>Static - On, ohne Protokoll</p>
+<p>Dynamic</p>
+<p>*PAgP (Cisco)
+*LACP</p>
+<p>Etherchannel > Prozess
+Portchannel > Interface</p>
+<p>Bedingung:</p>
+<ul>
+<li>gleicher Speed auf beiden Seiten</li>
+<li>&ldquo;access &lt;> access&rdquo; oder &ldquo;Trunk &lt;> Trunk&rdquo;</li>
+<li>gleiche VLANs</li>
+</ul>
+<pre><code>  sh etherchannel sum
+</code></pre><h2 id=ntp>
+NTP
+<a class=anchor href=#ntp>#</a>
+</h2>
+<p>Configure the ntp on a switch. This also enables the ntp server mode on the switch. Use access lists to prevent other clients
+from accessing the ntp services on the switch.</p>
+<pre><code>  ntp server ip
+</code></pre><p>Securing NTP with access list</p>
+<pre><code>  access-list 1 permit 10.1.0.0 0.0.255.255
+  ntp access-group serve-only 1
+</code></pre><p>Configures the switch to only answer ntp sync requests from 10.1.0.0/16</p>
+<p>Prüfung: NTP Versionen und Unterschiede!</p>
+<h2 id=snmpv3>
+SNMPv3
+<a class=anchor href=#snmpv3>#</a>
+</h2>
+<p>To prevent index shuffle during reboot and software updates set</p>
+<pre><code>  snmp-server ifindex persist
+</code></pre><p>Enable and limit the traps to cpu and port-security</p>
+<pre><code>  access-list 99 permit 10.1.1.0 0.0.0.255
+  snmp-server view OPS
+  snmp-server group groupZ v3 priv read OPS access 99
+  snmp-server group userZ groupZ v3 auth sha secret priv aes 256 anothersecret
+  snmp-server enable traps
+  snmp-server host ip traps version 3 priv userZ cpu port-security
+</code></pre><h2 id=ip-sla>
+IP SLA
+<a class=anchor href=#ip-sla>#</a>
+</h2>
+<pre><code>measure udp-jitter, etc from a switch to another switch. Should be visible in librenms
+</code></pre><h2 id=storm-control>
+Storm control
+<a class=anchor href=#storm-control>#</a>
+</h2>
+<pre><code>  storm-control broadcast level 1.0 0.70
+</code></pre><h2 id=port-security>
+Port-Security
+<a class=anchor href=#port-security>#</a>
+</h2>
+<p>enable on all access ports to prevent MAC address flooding</p>
+<h2 id=dhcp-spoofing>
+DHCP Spoofing
+<a class=anchor href=#dhcp-spoofing>#</a>
+</h2>
+<p>configure ip dhcp snooping first and then ip source guard, to prevent devices from using fixed ip addresses.</p>
+<pre><code>  ip dhcp snooping
+  int Te1/0/1
+    desc uplink
+    ip dhcp snooping trust
+
+  ip dhcp snooping
+  int gi1/0/1
+    ip verify source
+</code></pre><p>show all IP addresses on the switch ports</p>
+<pre><code>  sh ip verify source
+</code></pre><h3 id=dynamic-arp-inspection>
+Dynamic ARP Inspection
+<a class=anchor href=#dynamic-arp-inspection>#</a>
+</h3>
+<p>prevents arp poisoning</p>
+<pre><code>  int Te1//0/1
+    desc uplink
+    ip arp inspection trust
+
+  ip arp inspection vlan 5
+</code></pre></article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#enable-ssh-login-on-a-catalyst-3850>Enable SSH login on a Catalyst 3850</a></li>
+<li><a href=#check-this-when-setting-up-new-switches>Check this when setting up new switches.</a>
+<ul>
+<li><a href=#editing-acls>Editing ACLs</a></li>
+</ul>
+</li>
+<li><a href=#sdm>SDM</a></li>
+<li><a href=#spanning-tree>Spanning Tree</a>
+<ul>
+<li><a href=#stp>STP</a></li>
+<li><a href=#loopguard>Loopguard</a></li>
+<li><a href=#unidirectionallinkdetection---udld>UniDirectionalLinkDetection - UDLD</a></li>
+</ul>
+</li>
+<li><a href=#vtp>VTP</a></li>
+<li><a href=#link-aggregation>Link Aggregation</a></li>
+<li><a href=#ntp>NTP</a></li>
+<li><a href=#snmpv3>SNMPv3</a></li>
+<li><a href=#ip-sla>IP SLA</a></li>
+<li><a href=#storm-control>Storm control</a></li>
+<li><a href=#port-security>Port-Security</a></li>
+<li><a href=#dhcp-spoofing>DHCP Spoofing</a>
+<ul>
+<li><a href=#dynamic-arp-inspection>Dynamic ARP Inspection</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

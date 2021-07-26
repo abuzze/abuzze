@@ -1,0 +1,232 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Ruby Setup #  First install rbenv and ruby-build to have different ruby versions. Could have used rvm, but it looks a little bit like rotten foot.
+$ brew update $ brew install rbenv ruby-build $ echo 'eval &#34;$(rbenv init -)&#34;' >> ~/.zshrc list all available versions: #  $ rbenv install -l  install a Ruby version: #  $ rbenv install 2.0.0-p247  switch to a specific ruby version only for the current session #  $ rbenv local 1.">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Ruby Setup on a Macbook">
+<meta property="og:description" content="Ruby Setup #  First install rbenv and ruby-build to have different ruby versions. Could have used rvm, but it looks a little bit like rotten foot.
+$ brew update $ brew install rbenv ruby-build $ echo 'eval &#34;$(rbenv init -)&#34;' >> ~/.zshrc list all available versions: #  $ rbenv install -l  install a Ruby version: #  $ rbenv install 2.0.0-p247  switch to a specific ruby version only for the current session #  $ rbenv local 1.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.om.de/docs/ruby-setup/"><meta property="article:section" content="docs">
+<title>Ruby Setup on a Macbook | Memoirs of a sysadmin</title>
+<link rel=manifest href=/manifest.json>
+<link rel=icon href=/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+<script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.f8d1f028cc09d07e2ab160f8f6576a9ecadcd41b3c48697e514b8a523da27ccb.js integrity="sha256-+NHwKMwJ0H4qsWD49ldqnsrc1Bs8SGl+UUuKUj2ifMs=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/><span>Memoirs of a sysadmin</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://github.com/abuzze target=_blank rel=noopener>
+Github
+</a>
+</li>
+</ul>
+<ul>
+<li><a href=/docs/>Cheatsheets</a>
+<ul>
+<li><a href=/docs/cheat-sheet/>Arduino</a></li>
+<li><a href=/docs/active-directory/>Active Directory</a></li>
+<li><a href=/docs/cisco/>Cisco</a></li>
+<li><a href=/docs/docker/>Docker</a></li>
+<li><a href=/docs/git/>Git</a></li>
+<li><a href=/docs/juniper/>Juniper</a></li>
+<li><a href=/docs/k8s/>k8s</a></li>
+<li><a href=/docs/linux/>Linux</a></li>
+<li><a href=/docs/lxc/>LXC</a></li>
+<li><a href=/docs/macos/>MacOS</a></li>
+<li><a href=/docs/mongodb/>MongoDB</a></li>
+<li><a href=/docs/python/>Python</a></li>
+<li><a href=/docs/ruby-setup/ class=active>Ruby</a></li>
+</ul>
+</li>
+<li><a href=/posts/>Blog</a></li>
+</ul>
+<ul>
+<li>
+<a href=https://themes.gohugo.io/hugo-book/ target=_blank rel=noopener>
+Hugo Themes
+</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Ruby Setup on a Macbook</strong>
+<label for=toc-control>
+<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#bundler-and-mojave>bundler and mojave</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=ruby-setup>
+Ruby Setup
+<a class=anchor href=#ruby-setup>#</a>
+</h1>
+<p>First install rbenv and ruby-build to have different ruby versions. Could have used rvm, but it looks a little bit like rotten foot.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ brew update
+$ brew install rbenv ruby-build
+$ echo <span style=color:#e6db74>&#39;eval &#34;$(rbenv init -)&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</code></pre></div><h1 id=list-all-available-versions>
+list all available versions:
+<a class=anchor href=#list-all-available-versions>#</a>
+</h1>
+<pre><code>$ rbenv install -l
+</code></pre>
+<h1 id=install-a-ruby-version>
+install a Ruby version:
+<a class=anchor href=#install-a-ruby-version>#</a>
+</h1>
+<pre><code>$ rbenv install 2.0.0-p247
+</code></pre>
+<h1 id=switch-to-a-specific-ruby-version-only-for-the-current-session>
+switch to a specific ruby version only for the current session
+<a class=anchor href=#switch-to-a-specific-ruby-version-only-for-the-current-session>#</a>
+</h1>
+<pre><code>$ rbenv local 1.9.3-p327
+</code></pre>
+<h1 id=switch-to-a-ruby-version-in-all-shell>
+switch to a ruby version in all shell
+<a class=anchor href=#switch-to-a-ruby-version-in-all-shell>#</a>
+</h1>
+<pre><code>$ rbenv global 1.9.3-p327
+</code></pre>
+<p>Command Reference here: <a href=https://github.com/sstephenson/rbenv>https://github.com/sstephenson/rbenv</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ gem update
+$ gem install rails
+</code></pre></div><h1 id=to-locate-a-gem>
+to locate a gem
+<a class=anchor href=#to-locate-a-gem>#</a>
+</h1>
+<pre><code>$ gem which gemname
+</code></pre>
+<h1 id=show-the-local-gem-version>
+show the local gem version
+<a class=anchor href=#show-the-local-gem-version>#</a>
+</h1>
+<pre><code>$ gem list -l gemname
+</code></pre>
+<h1 id=uninstall-a-gem>
+uninstall a gem
+<a class=anchor href=#uninstall-a-gem>#</a>
+</h1>
+<pre><code>$ gem uninstall gemname
+</code></pre>
+<h1 id=to-show-some-infos-about-the-current-gem-enviroment-including-the-gem-directories>
+to show some infos about the current gem enviroment, including the gem directories
+<a class=anchor href=#to-show-some-infos-about-the-current-gem-enviroment-including-the-gem-directories>#</a>
+</h1>
+<pre><code>$ gem environment
+</code></pre>
+<h1 id=print-the-ruby-on-rails-version-for-the-project-in-the-current-directory>
+print the ruby on rails version for the project in the current directory
+<a class=anchor href=#print-the-ruby-on-rails-version-for-the-project-in-the-current-directory>#</a>
+</h1>
+<h1 id=or-it-prints-the-default-ruby-on-rails-version>
+or it prints the default ruby on rails version
+<a class=anchor href=#or-it-prints-the-default-ruby-on-rails-version>#</a>
+</h1>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ rails --version
+&gt; <span style=color:#e6db74>&#34;Rails 4.1.0&#34;</span>
+</code></pre></div><h1 id=update-rails-with>
+update rails with
+<a class=anchor href=#update-rails-with>#</a>
+</h1>
+<pre><code>$ gem install rails
+&gt; &quot;Rails 4.1.4&quot;
+</code></pre><h1 id=install-specific-rails-version>
+install specific rails version
+<a class=anchor href=#install-specific-rails-version>#</a>
+</h1>
+<pre><code>$ gem install rails --version 3.1.0
+</code></pre>
+<h1 id=run-a-command-with-a-specific-rails-version-wont-affect-already-created-rails-projects>
+run a command with a specific rails version (won&rsquo;t affect already created rails projects)
+<a class=anchor href=#run-a-command-with-a-specific-rails-version-wont-affect-already-created-rails-projects>#</a>
+</h1>
+<pre><code>$ rails _3.1.0_ --version
+</code></pre>
+<h1 id=to-updatedowngrade-ruby-on-rails-change-the-rails-version-in-the-gem-file-and-run>
+to update/downgrade ruby on rails change the rails version in the gem file and run
+<a class=anchor href=#to-updatedowngrade-ruby-on-rails-change-the-rails-version-in-the-gem-file-and-run>#</a>
+</h1>
+<pre><code>$ bundle update
+$ bundle install
+</code></pre><h1 id=to-updatedowngrade-only-a-specific-section-eg-and-ignore-production>
+to update/downgrade only a specific section (eg. and ignore production)
+<a class=anchor href=#to-updatedowngrade-only-a-specific-section-eg-and-ignore-production>#</a>
+</h1>
+<pre><code>$ bundle install --without production
+</code></pre>
+<h3 id=bundler-and-mojave>
+bundler and mojave
+<a class=anchor href=#bundler-and-mojave>#</a>
+</h3>
+<p>To install older nokogiri gems (1.8.5) add this to ./bundle/config within the project folder or in your dotfiles</p>
+<pre><code>BUNDLE_BUILD__NOKOGIRI: &quot;--use-system-libraries=true --with-xml2-include=/usr/local/opt/libxml2/include/libxml2&quot;
+BUNDLE_JOBS: &quot;7&quot;
+BUNDLE_PATH: &quot;vendor/bundle&quot;
+</code></pre>
+<p>To install mysql2 gem on mojave</p>
+<pre><code>sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+</code></pre>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#bundler-and-mojave>bundler and mojave</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

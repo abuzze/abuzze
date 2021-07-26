@@ -1,0 +1,233 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Bonjourbrowser #  $ dns-sd -B _afpovertcp._tcp Browsing for _afpovertcp._tcp DATE: ---Thu 16 Jun 2016--- 9:44:33.789 ...STARTING... Timestamp A/R Flags if Domain Service Type Instance Name 9:44:33.790 Add 2 9 local. _afpovertcp._tcp. netsus-server speed up cifs/smb #  	sudo sysctl -w net.inet.tcp.delayed_ack=0 persist it in /etc/sysctl.conf
+Launchd #  alle Einträge anzeigen
+	launchctl list netzwerkverkehr sniffen #  alles auf der Netzwerkkarte
+	sudo tcpdump -n -i en0 DNS Cache löschen #  Mac OS X Lion, Mountain Lion (10.">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="MacOS Cheatsheet">
+<meta property="og:description" content="Bonjourbrowser #  $ dns-sd -B _afpovertcp._tcp Browsing for _afpovertcp._tcp DATE: ---Thu 16 Jun 2016--- 9:44:33.789 ...STARTING... Timestamp A/R Flags if Domain Service Type Instance Name 9:44:33.790 Add 2 9 local. _afpovertcp._tcp. netsus-server speed up cifs/smb #  	sudo sysctl -w net.inet.tcp.delayed_ack=0 persist it in /etc/sysctl.conf
+Launchd #  alle Einträge anzeigen
+	launchctl list netzwerkverkehr sniffen #  alles auf der Netzwerkkarte
+	sudo tcpdump -n -i en0 DNS Cache löschen #  Mac OS X Lion, Mountain Lion (10.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.om.de/docs/macos/"><meta property="article:section" content="docs">
+<title>MacOS Cheatsheet | Memoirs of a sysadmin</title>
+<link rel=manifest href=/manifest.json>
+<link rel=icon href=/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+<script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.f8d1f028cc09d07e2ab160f8f6576a9ecadcd41b3c48697e514b8a523da27ccb.js integrity="sha256-+NHwKMwJ0H4qsWD49ldqnsrc1Bs8SGl+UUuKUj2ifMs=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/><span>Memoirs of a sysadmin</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://github.com/abuzze target=_blank rel=noopener>
+Github
+</a>
+</li>
+</ul>
+<ul>
+<li><a href=/docs/>Cheatsheets</a>
+<ul>
+<li><a href=/docs/cheat-sheet/>Arduino</a></li>
+<li><a href=/docs/active-directory/>Active Directory</a></li>
+<li><a href=/docs/cisco/>Cisco</a></li>
+<li><a href=/docs/docker/>Docker</a></li>
+<li><a href=/docs/git/>Git</a></li>
+<li><a href=/docs/juniper/>Juniper</a></li>
+<li><a href=/docs/k8s/>k8s</a></li>
+<li><a href=/docs/linux/>Linux</a></li>
+<li><a href=/docs/lxc/>LXC</a></li>
+<li><a href=/docs/macos/ class=active>MacOS</a></li>
+<li><a href=/docs/mongodb/>MongoDB</a></li>
+<li><a href=/docs/python/>Python</a></li>
+<li><a href=/docs/ruby-setup/>Ruby</a></li>
+</ul>
+</li>
+<li><a href=/posts/>Blog</a></li>
+</ul>
+<ul>
+<li>
+<a href=https://themes.gohugo.io/hugo-book/ target=_blank rel=noopener>
+Hugo Themes
+</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>MacOS Cheatsheet</strong>
+<label for=toc-control>
+<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#bonjourbrowser>Bonjourbrowser</a></li>
+<li><a href=#speed-up-cifssmb>speed up cifs/smb</a></li>
+<li><a href=#launchd>Launchd</a></li>
+<li><a href=#netzwerkverkehr-sniffen>netzwerkverkehr sniffen</a></li>
+<li><a href=#dns-cache-löschen>DNS Cache löschen</a></li>
+<li><a href=#versteckte-dateien-im-finder-anaus>versteckte Dateien im Finder an/aus</a></li>
+<li><a href=#mobile-backups-on-macbook-pro>Mobile Backups on Macbook Pro</a></li>
+<li><a href=#mysql-starten>mySQL starten</a></li>
+<li><a href=#mongodb-starten>MongoDB starten</a></li>
+<li><a href=#netboot>Netboot</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h3 id=bonjourbrowser>
+Bonjourbrowser
+<a class=anchor href=#bonjourbrowser>#</a>
+</h3>
+<pre><code>$ dns-sd -B _afpovertcp._tcp
+Browsing for _afpovertcp._tcp
+DATE: ---Thu 16 Jun 2016---
+ 9:44:33.789  ...STARTING...
+Timestamp     A/R    Flags  if Domain               Service Type         Instance Name
+ 9:44:33.790  Add        2   9 local.               _afpovertcp._tcp.    netsus-server
+</code></pre><h3 id=speed-up-cifssmb>
+speed up cifs/smb
+<a class=anchor href=#speed-up-cifssmb>#</a>
+</h3>
+<pre><code>	sudo sysctl -w net.inet.tcp.delayed_ack=0
+</code></pre><p>persist it in /etc/sysctl.conf</p>
+<h3 id=launchd>
+Launchd
+<a class=anchor href=#launchd>#</a>
+</h3>
+<p>alle Einträge anzeigen</p>
+<pre><code>	launchctl list
+</code></pre><h3 id=netzwerkverkehr-sniffen>
+netzwerkverkehr sniffen
+<a class=anchor href=#netzwerkverkehr-sniffen>#</a>
+</h3>
+<p>alles auf der Netzwerkkarte</p>
+<pre><code>	sudo tcpdump -n -i en0
+</code></pre><h3 id=dns-cache-löschen>
+DNS Cache löschen
+<a class=anchor href=#dns-cache-l%c3%b6schen>#</a>
+</h3>
+<p>Mac OS X Lion, Mountain Lion (10.7, 10.8)</p>
+<pre><code>	sudo killall -HUP mDNSResponder
+</code></pre><p>Mac OS X Leopard, Snow Leopard (10.5, 10.6)</p>
+<pre><code>	sudo dscacheutil -flushcache
+</code></pre><h3 id=versteckte-dateien-im-finder-anaus>
+versteckte Dateien im Finder an/aus
+<a class=anchor href=#versteckte-dateien-im-finder-anaus>#</a>
+</h3>
+<pre><code>	defaults write com.apple.Finder AppleShowAllFiles YES
+</code></pre><h3 id=mobile-backups-on-macbook-pro>
+Mobile Backups on Macbook Pro
+<a class=anchor href=#mobile-backups-on-macbook-pro>#</a>
+</h3>
+<pre><code>On a MPB with Lion or Mountain Lion the mobile Backups
+under /Volumes/MobileBackups can consume a lot of space.
+You can confirm this by looking into the Storage tab via about
+my mac. This backup is matched against a time maschine backup, but there is no switch in the sys prefs to disable it. But you can via terminal. Reboot afterwards and the mobile backups are gone.
+</code></pre>
+<pre><code>	sudo tmutil disablelocal
+</code></pre><h3 id=mysql-starten>
+mySQL starten
+<a class=anchor href=#mysql-starten>#</a>
+</h3>
+<pre><code>	sudo /usr/local/mysql/bin/mysqld_safe
+</code></pre><p>Alternative</p>
+<pre><code>	/usr/local/bin/mysql.server start
+</code></pre><h3 id=mongodb-starten>
+MongoDB starten
+<a class=anchor href=#mongodb-starten>#</a>
+</h3>
+<p>To have launchd start mongodb at login:</p>
+<pre><code>	ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
+</code></pre><p>Then to load mongodb now:</p>
+<pre><code>    launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+</code></pre><p>Or, if you don&rsquo;t want/need launchctl, you can just run:</p>
+<pre><code>    mongod --config /usr/local/etc/mongod.conf
+</code></pre><h3 id=netboot>
+Netboot
+<a class=anchor href=#netboot>#</a>
+</h3>
+<pre><code>C : Forces most Macs to boot from the CD-Rom drive instead of the internal hard drive. Only works with Apple ROM drives and with bootable CD discs.
+D : Forces the first internal hard drive to be the startup disk.
+N : Netboot (New World ROM machines only) – Looks for BOOTP or TFTP Server on the network to boot from
+R : Forces PowerBooks to reset their screen to default size (helpful if you’ve been hooked up to an external montior or projector!)
+T : Target Disk Mode (FireWire) – Puts machines with built-in FireWire into target Disk mode so a system attached with a FireWire cable will have that device show up as a hard drive on their system. Very useful for PowerBooks!
+Mouse Button Held Down : Ejects any mounted removable media.
+Shift : Disables all extensions (Mac OS 7-9), or disables Login items when using Mac OS X 10.1.3 or later. Also works when booting Classic mode up just like you were using the OS natively.
+Option : When using an Open Firmware &quot;New World ROM&quot; capable system, the System Picker will appear and query all mounted devices for bootable systems, returning a list of drives &amp; what OS they have on them. On &quot;Old World&quot; systems the machine will simply boot into it’s default OS without any Finder windows open.
+Space bar : Brings up Apple’s Extension Manager (or Casady &amp; Greene’s Conflict Catcher, if installed) up at startup to allow you to modify your extension set.
+Command-V : Boots Mac OS X into &quot;Verbose Mode&quot;, reporting every console message generated during startup. Really shows what’s going on behind the scenes with your machine on startup!
+Command-S : Boots Mac OS X into &quot;Single User Mode&quot; – helpful to fix problems with Mac OS X, if necessary.
+Command-Option : Rebuilds the Desktop (Mac OS 7-9).
+Command-Option-P-R : Erases PRAM if held down immediately after startup tone. Your machine will chime when it’s erased the PRAM, most people will hold this combination for a total of 3 chimes to really flush the PRAM out.
+Command-Option-N-V : Erases NVRAM (Non-Volatile RAM). Used with later Power Macintosh systems mostly.
+Command-Option-O-F : Boots the machine into Open Firmware (New World ROM systems only).
+Command-Option-Shift-Delete : Forces your Mac to startup from its internal CD-ROM drive or an external hard drive. Very helpful if you have a 3rd party CD-ROM drive that is not an Apple ROM device.
+Command-Option-Shift-Delete-#(where #= a SCSI DEVICE ID) : Boot from a specific SCSI device, if you have your 3rd party CD-ROM drive set to SCSI ID 3, you would press &quot;3&quot; as the # in the combination.
+</code></pre>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#bonjourbrowser>Bonjourbrowser</a></li>
+<li><a href=#speed-up-cifssmb>speed up cifs/smb</a></li>
+<li><a href=#launchd>Launchd</a></li>
+<li><a href=#netzwerkverkehr-sniffen>netzwerkverkehr sniffen</a></li>
+<li><a href=#dns-cache-löschen>DNS Cache löschen</a></li>
+<li><a href=#versteckte-dateien-im-finder-anaus>versteckte Dateien im Finder an/aus</a></li>
+<li><a href=#mobile-backups-on-macbook-pro>Mobile Backups on Macbook Pro</a></li>
+<li><a href=#mysql-starten>mySQL starten</a></li>
+<li><a href=#mongodb-starten>MongoDB starten</a></li>
+<li><a href=#netboot>Netboot</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

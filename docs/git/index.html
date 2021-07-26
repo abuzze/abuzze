@@ -1,0 +1,209 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="GITHUB CHEATSHEET #  Creating a new local repo
+git init git add . git commit -m &#34;Initial commit&#34; Show commit history
+git log Reverting everything to the last committed state
+git reset git checkout . Hard delete unpublished commits
+# This will destroy any local modifications. # Don't do it if you have uncommitted work you want to keep. git reset --hard 0d1d7fc32 # or switch to the last commit git reset --hard HEAD Checking unstaged changes">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Git Cheatsheet">
+<meta property="og:description" content="GITHUB CHEATSHEET #  Creating a new local repo
+git init git add . git commit -m &#34;Initial commit&#34; Show commit history
+git log Reverting everything to the last committed state
+git reset git checkout . Hard delete unpublished commits
+# This will destroy any local modifications. # Don't do it if you have uncommitted work you want to keep. git reset --hard 0d1d7fc32 # or switch to the last commit git reset --hard HEAD Checking unstaged changes">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.om.de/docs/git/"><meta property="article:section" content="docs">
+<title>Git Cheatsheet | Memoirs of a sysadmin</title>
+<link rel=manifest href=/manifest.json>
+<link rel=icon href=/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+<script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.f8d1f028cc09d07e2ab160f8f6576a9ecadcd41b3c48697e514b8a523da27ccb.js integrity="sha256-+NHwKMwJ0H4qsWD49ldqnsrc1Bs8SGl+UUuKUj2ifMs=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/><span>Memoirs of a sysadmin</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://github.com/abuzze target=_blank rel=noopener>
+Github
+</a>
+</li>
+</ul>
+<ul>
+<li><a href=/docs/>Cheatsheets</a>
+<ul>
+<li><a href=/docs/cheat-sheet/>Arduino</a></li>
+<li><a href=/docs/active-directory/>Active Directory</a></li>
+<li><a href=/docs/cisco/>Cisco</a></li>
+<li><a href=/docs/docker/>Docker</a></li>
+<li><a href=/docs/git/ class=active>Git</a></li>
+<li><a href=/docs/juniper/>Juniper</a></li>
+<li><a href=/docs/k8s/>k8s</a></li>
+<li><a href=/docs/linux/>Linux</a></li>
+<li><a href=/docs/lxc/>LXC</a></li>
+<li><a href=/docs/macos/>MacOS</a></li>
+<li><a href=/docs/mongodb/>MongoDB</a></li>
+<li><a href=/docs/python/>Python</a></li>
+<li><a href=/docs/ruby-setup/>Ruby</a></li>
+</ul>
+</li>
+<li><a href=/posts/>Blog</a></li>
+</ul>
+<ul>
+<li>
+<a href=https://themes.gohugo.io/hugo-book/ target=_blank rel=noopener>
+Hugo Themes
+</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Git Cheatsheet</strong>
+<label for=toc-control>
+<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#creating-a-new-repository>Creating a new repository</a></li>
+<li><a href=#renaming-a-file-via-git-so-it-doesnt-count-as-a-new-file>Renaming a file via git, so it doesn&rsquo;t count as a new file</a></li>
+<li><a href=#deleting-a-file-via-git>Deleting a file via git</a></li>
+<li><a href=#untracking-a-file-that-was-already-commited-and-tracked-but-is-now-in-the-gitignore>untracking a file that was already commited and tracked, but is now in the .gitignore</a></li>
+<li><a href=#retracking-that-file-please-remove-from-gitignore-before-you-do-this>retracking that file, please remove from .gitignore before you do this</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=github-cheatsheet>
+GITHUB CHEATSHEET
+<a class=anchor href=#github-cheatsheet>#</a>
+</h1>
+<p>Creating a new local repo</p>
+<pre><code>git init
+git add .
+git commit -m &quot;Initial commit&quot;
+</code></pre><p>Show commit history</p>
+<pre><code>git log
+</code></pre><p>Reverting everything to the last committed state</p>
+<pre><code>git reset
+git checkout .
+</code></pre><p>Hard delete unpublished commits</p>
+<pre><code># This will destroy any local modifications.
+# Don't do it if you have uncommitted work you want to keep.
+git reset --hard 0d1d7fc32
+# or switch to the last commit
+git reset --hard HEAD
+</code></pre><p>Checking unstaged changes</p>
+<pre><code>git status
+</code></pre><p>Pulling from master to local repository</p>
+<pre><code>git init (only first time)
+git remote add upstream &lt;master repository url&gt; # (only first time)
+git pull upstream master &lt;master repository url&gt;
+</code></pre><p>Pushing from local repository to personal fork. This is
+however only necessary when you plan on doing a pull
+request to the master</p>
+<pre><code>git push origin master
+</code></pre><p>Committing changes to the local repository:</p>
+<pre><code>git commit -m &lt;commit message&gt;
+</code></pre><p>Committing changes to the local repository, without adding new files (only modified files:</p>
+<pre><code>git commit -a -m &lt;commit message&gt;
+</code></pre><h3 id=creating-a-new-repository>
+Creating a new repository
+<a class=anchor href=#creating-a-new-repository>#</a>
+</h3>
+<ul>
+<li>Go to your own github page @ <a href=https://github.com/>https://github.com/</a></li>
+<li>Click New repository</li>
+<li>Define a </li>
+<li>Provide a description</li>
+<li>Choose public (or private if you wish to pay the required fee of $7.00/month)</li>
+<li>Choose wheter or not you wish to create the new repository with a README file</li>
+<li>Click Create repository</li>
+<li>Open your prefered terminal and execute the following</li>
+</ul>
+<pre><code>git config --global user.name &quot;Your name&quot;
+git config --global user.email your@email.domain
+git config --global core.editor &quot;subl -w&quot;
+mkdir &lt;repository name&gt;
+cd &lt;repository name&gt;
+git init
+</code></pre>
+<h3 id=renaming-a-file-via-git-so-it-doesnt-count-as-a-new-file>
+Renaming a file via git, so it doesn&rsquo;t count as a new file
+<a class=anchor href=#renaming-a-file-via-git-so-it-doesnt-count-as-a-new-file>#</a>
+</h3>
+<pre><code>git mv oldfilename newfilename
+</code></pre><h3 id=deleting-a-file-via-git>
+Deleting a file via git
+<a class=anchor href=#deleting-a-file-via-git>#</a>
+</h3>
+<pre><code>git rm filename
+</code></pre><h3 id=untracking-a-file-that-was-already-commited-and-tracked-but-is-now-in-the-gitignore>
+untracking a file that was already commited and tracked, but is now in the .gitignore
+<a class=anchor href=#untracking-a-file-that-was-already-commited-and-tracked-but-is-now-in-the-gitignore>#</a>
+</h3>
+<pre><code>git update-index --assume-unchanged &lt;file&gt;
+</code></pre><h3 id=retracking-that-file-please-remove-from-gitignore-before-you-do-this>
+retracking that file, please remove from .gitignore before you do this
+<a class=anchor href=#retracking-that-file-please-remove-from-gitignore-before-you-do-this>#</a>
+</h3>
+<pre><code>git update-index --no-assume-unchanged &lt;file&gt;
+</code></pre></article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#creating-a-new-repository>Creating a new repository</a></li>
+<li><a href=#renaming-a-file-via-git-so-it-doesnt-count-as-a-new-file>Renaming a file via git, so it doesn&rsquo;t count as a new file</a></li>
+<li><a href=#deleting-a-file-via-git>Deleting a file via git</a></li>
+<li><a href=#untracking-a-file-that-was-already-commited-and-tracked-but-is-now-in-the-gitignore>untracking a file that was already commited and tracked, but is now in the .gitignore</a></li>
+<li><a href=#retracking-that-file-please-remove-from-gitignore-before-you-do-this>retracking that file, please remove from .gitignore before you do this</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

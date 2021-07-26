@@ -1,0 +1,1240 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Basic Linux Cheatsheet #  Commands are in random order; execute at your own risk #  setup ansible in venv #  	easy_install pip pip install virtualenv virtualenvwrapper mkdir ~/venv/ansible_2_5_11 virtualenv ~/venv/ansible_2_5_11 source ~/venv/ansible_2_5_11/bin/activate pip install nose cryptography tornado pip install ansible==2.5.11 to deactivate the venv
+deactivate  Sendmail testen #  echo &ldquo;Subject: test&rdquo; | /usr/lib/sendmail -v me@domain.com
+fehlender Einf. key im Midnight Commander auf OSX
+Ctrl + t markiert in mc einen einzelnen Eintrag  Prozesse die mit D markiert sind finden, um Performanceprobleme zu finden">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Linux Cheatsheet">
+<meta property="og:description" content="Basic Linux Cheatsheet #  Commands are in random order; execute at your own risk #  setup ansible in venv #  	easy_install pip pip install virtualenv virtualenvwrapper mkdir ~/venv/ansible_2_5_11 virtualenv ~/venv/ansible_2_5_11 source ~/venv/ansible_2_5_11/bin/activate pip install nose cryptography tornado pip install ansible==2.5.11 to deactivate the venv
+deactivate  Sendmail testen #  echo &ldquo;Subject: test&rdquo; | /usr/lib/sendmail -v me@domain.com
+fehlender Einf. key im Midnight Commander auf OSX
+Ctrl + t markiert in mc einen einzelnen Eintrag  Prozesse die mit D markiert sind finden, um Performanceprobleme zu finden">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.om.de/docs/linux/"><meta property="article:section" content="docs">
+<title>Linux Cheatsheet | Memoirs of a sysadmin</title>
+<link rel=manifest href=/manifest.json>
+<link rel=icon href=/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+<script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.f8d1f028cc09d07e2ab160f8f6576a9ecadcd41b3c48697e514b8a523da27ccb.js integrity="sha256-+NHwKMwJ0H4qsWD49ldqnsrc1Bs8SGl+UUuKUj2ifMs=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/><span>Memoirs of a sysadmin</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://github.com/abuzze target=_blank rel=noopener>
+Github
+</a>
+</li>
+</ul>
+<ul>
+<li><a href=/docs/>Cheatsheets</a>
+<ul>
+<li><a href=/docs/cheat-sheet/>Arduino</a></li>
+<li><a href=/docs/active-directory/>Active Directory</a></li>
+<li><a href=/docs/cisco/>Cisco</a></li>
+<li><a href=/docs/docker/>Docker</a></li>
+<li><a href=/docs/git/>Git</a></li>
+<li><a href=/docs/juniper/>Juniper</a></li>
+<li><a href=/docs/k8s/>k8s</a></li>
+<li><a href=/docs/linux/ class=active>Linux</a></li>
+<li><a href=/docs/lxc/>LXC</a></li>
+<li><a href=/docs/macos/>MacOS</a></li>
+<li><a href=/docs/mongodb/>MongoDB</a></li>
+<li><a href=/docs/python/>Python</a></li>
+<li><a href=/docs/ruby-setup/>Ruby</a></li>
+</ul>
+</li>
+<li><a href=/posts/>Blog</a></li>
+</ul>
+<ul>
+<li>
+<a href=https://themes.gohugo.io/hugo-book/ target=_blank rel=noopener>
+Hugo Themes
+</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Linux Cheatsheet</strong>
+<label for=toc-control>
+<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#commands-are-in-random-order-execute-at-your-own-risk>Commands are in random order; execute at your own risk</a>
+<ul>
+<li><a href=#setup-ansible-in-venv>setup ansible in venv</a></li>
+<li><a href=#sendmail-testen>Sendmail testen</a></li>
+<li><a href=#in-dateien-suchen>in Dateien suchen</a></li>
+<li><a href=#dateien-suchen>Dateien suchen</a></li>
+<li><a href=#bestimmte-dateienordner-abcd-in-einem-unterverzeichis-löschen>bestimmte dateien/ordner abcd in einem Unterverzeichis löschen</a></li>
+<li><a href=#prozess-in-den-hintergrund-schicken-und-mit-disown-gegen-sighup-schützen-damit-er-weiterläuft-und-man-die-ssh-verbindung-trotzdem-beenden-kann>Prozess in den Hintergrund schicken und mit disown gegen SIGHUP schützen, damit er weiterläuft und man die SSH Verbindung trotzdem beenden kann</a></li>
+<li><a href=#paketverwaltung>Paketverwaltung</a></li>
+<li><a href=#programe-per-source-installieren>programe per source installieren</a></li>
+<li><a href=#startup--initscripte>Startup / Initscripte</a></li>
+<li><a href=#benutzer-anlegenlöschenverwalten>Benutzer anlegen/löschen/verwalten</a></li>
+<li><a href=#möglichkeiten-die-linuxdistro-rausfinden>Möglichkeiten die Linuxdistro rausfinden</a></li>
+<li><a href=#zertifikate-konvertieren>Zertifikate konvertieren</a></li>
+<li><a href=#zertifikate-auslesen>Zertifikate auslesen</a></li>
+<li><a href=#verify-if-key-belongs-to-certificate>Verify if key belongs to certificate</a></li>
+<li><a href=#verify-chain-with-openssl>verify chain with openssl</a></li>
+<li><a href=#openssl-encrytion>openssl encrytion</a></li>
+<li><a href=#tcp-traffic-analyse>TCP traffic Analyse</a></li>
+<li><a href=#mysql-service-neu-starten>mysql service neu starten</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<ul>
+<li></li>
+<li><a href=#key>key</a></li>
+<li><a href=#shell-magic>Shell Magic</a></li>
+<li><a href=#cpan>CPAN</a></li>
+<li><a href=#package-managment>package managment</a></li>
+<li><a href=#rsyslog>rsyslog</a></li>
+<li><a href=#dns-server-mit-resolfconf-ändern-ohne-interfaceneustart>DNS Server mit resolfconf ändern ohne Interfaceneustart</a></li>
+<li><a href=#lvm-mounten>LVM mounten</a></li>
+<li><a href=#rename-an-ubuntu-after-cloning-the-vm>rename an ubuntu after cloning the vm</a></li>
+<li><a href=#insert-new-harddrive-to-vm-with-lvm>insert new harddrive to vm with LVM</a></li>
+<li><a href=#insert-new-harddrive-in-a-virtual-server>insert new harddrive in a virtual server</a></li>
+<li><a href=#programm-ohne-sudo-mit-setuid-bit-ausführen>programm ohne sudo mit setuid bit ausführen</a></li>
+<li><a href=#smbshares-mounten>smbshares mounten</a></li>
+</ul>
+</li>
+<li><a href=#nfs-shares>nfs shares</a>
+<ul>
+<li><a href=#nfs-share-mounten>nfs share mounten</a></li>
+<li><a href=#nfs-share-über-fstab-mounten>nfs share über fstab mounten</a></li>
+</ul>
+</li>
+<li><a href=#berechtigungen>Berechtigungen</a></li>
+</ul>
+<ul>
+<li><a href=#umask-gilt-für-einen-prozess-und-verhindert-filepermissions-beim-anlagen>umask gilt für einen Prozess und verhindert Filepermissions beim Anlagen.</a>
+<ul>
+<li><a href=#aliase>aliase</a></li>
+<li><a href=#user-ausloggen>User ausloggen</a></li>
+<li><a href=#user-sperren>User sperren</a></li>
+</ul>
+</li>
+<li><a href=#netzwerk>Netzwerk</a>
+<ul>
+<li><a href=#netzwerkkarten-konfigurieren>Netzwerkkarten konfigurieren</a></li>
+<li><a href=#videodownload-script>videodownload script</a></li>
+<li><a href=#sqlite3-commands>SQLITE3 Commands</a></li>
+<li><a href=#autocomplete-für-services>autocomplete für services</a></li>
+</ul>
+</li>
+<li><a href=#glance-installieren-httpsgithubcomnicolargoglances>Glance installieren (<a href=https://github.com/nicolargo/glances>https://github.com/nicolargo/glances</a>)</a>
+<ul>
+<li><a href=#pip-installieren>pip installieren</a></li>
+<li><a href=#python-dev-installieren-für-psutil-abhängigkeit-wird-von-glance-aufgelöst>python-dev installieren für psutil (Abhängigkeit wird von Glance aufgelöst)</a></li>
+<li><a href=#spezielle-version-eines-pakets-installieren>spezielle Version eines Pakets installieren</a></li>
+<li><a href=#use---user-python-on-osx-1011-to-bypass-a-rootless-problem-while-upgrading>use &ndash;user python on OSX 10.11 to bypass a rootless problem while upgrading</a></li>
+<li><a href=#script-das-beim-start-jeder-ssh-session-ausgeführt-wird>Script das beim Start jeder SSH Session ausgeführt wird</a></li>
+<li><a href=#http-zu-https-forwarden-mit-apache2>http zu https forwarden mit Apache2</a></li>
+<li><a href=#seite-mit-htaccess-schützen>Seite mit htaccess schützen</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=basic-linux-cheatsheet>
+Basic Linux Cheatsheet
+<a class=anchor href=#basic-linux-cheatsheet>#</a>
+</h1>
+<h2 id=commands-are-in-random-order-execute-at-your-own-risk>
+Commands are in random order; execute at your own risk
+<a class=anchor href=#commands-are-in-random-order-execute-at-your-own-risk>#</a>
+</h2>
+<h3 id=setup-ansible-in-venv>
+setup ansible in venv
+<a class=anchor href=#setup-ansible-in-venv>#</a>
+</h3>
+<pre><code>	easy_install pip
+	pip install virtualenv virtualenvwrapper
+	mkdir ~/venv/ansible_2_5_11
+	virtualenv ~/venv/ansible_2_5_11
+	source ~/venv/ansible_2_5_11/bin/activate
+	pip install nose cryptography tornado
+	pip install ansible==2.5.11
+</code></pre><p>to deactivate the venv</p>
+<pre><code>deactivate
+</code></pre>
+<h3 id=sendmail-testen>
+Sendmail testen
+<a class=anchor href=#sendmail-testen>#</a>
+</h3>
+<p>echo &ldquo;Subject: test&rdquo; | /usr/lib/sendmail -v <a href=mailto:me@domain.com>me@domain.com</a></p>
+<p>fehlender Einf. key im Midnight Commander auf OSX</p>
+<pre><code>Ctrl + t markiert in mc einen einzelnen Eintrag
+</code></pre>
+<p>Prozesse die mit D markiert sind finden, um Performanceprobleme zu finden</p>
+<pre><code>while true; do date; ps auxf | awk '{if($8==&quot;D&quot;) print $0;}'; sleep 1; done
+</code></pre>
+<p>welchen dateien werden von welchen Prozess genutzt</p>
+<pre><code>lsof -p 16528
+</code></pre>
+<p>Wird ein unlinked file von einem Prozess offen gehalten?</p>
+<pre><code>lsof -a +L1 /dev/file
+</code></pre>
+<p>oder per User</p>
+<pre><code>lsof -u www-data
+</code></pre>
+<h3 id=in-dateien-suchen>
+in Dateien suchen
+<a class=anchor href=#in-dateien-suchen>#</a>
+</h3>
+<pre><code>grep -r -i somethingtosearchfor ./
+grep -rn $'\xFEFE' * #utf8 BOM finden auch mit FEFF suchen
+</code></pre>
+<h3 id=dateien-suchen>
+Dateien suchen
+<a class=anchor href=#dateien-suchen>#</a>
+</h3>
+<pre><code>find /var/ -name '*.jpg'
+</code></pre>
+<h3 id=bestimmte-dateienordner-abcd-in-einem-unterverzeichis-löschen>
+bestimmte dateien/ordner abcd in einem Unterverzeichis löschen
+<a class=anchor href=#bestimmte-dateienordner-abcd-in-einem-unterverzeichis-l%c3%b6schen>#</a>
+</h3>
+<pre><code>find . -name abcd -type d -exec rm -rf {} \;
+</code></pre>
+<p>um zu schauen welche Files betroffen sind</p>
+<pre><code>find . -name abcd -type d -exec echo {} \;
+</code></pre>
+<h3 id=prozess-in-den-hintergrund-schicken-und-mit-disown-gegen-sighup-schützen-damit-er-weiterläuft-und-man-die-ssh-verbindung-trotzdem-beenden-kann>
+Prozess in den Hintergrund schicken und mit disown gegen SIGHUP schützen, damit er weiterläuft und man die SSH Verbindung trotzdem beenden kann
+<a class=anchor href=#prozess-in-den-hintergrund-schicken-und-mit-disown-gegen-sighup-sch%c3%bctzen-damit-er-weiterl%c3%a4uft-und-man-die-ssh-verbindung-trotzdem-beenden-kann>#</a>
+</h3>
+<pre><code>./long_running_script
+ctrl+z #pausiert den Prozess
+bg #schickt ihn in den Hintergrund
+disown #schütz ihn gegen den SIGHUP beim beenden der SSH Session
+</code></pre>
+<h3 id=paketverwaltung>
+Paketverwaltung
+<a class=anchor href=#paketverwaltung>#</a>
+</h3>
+<p>Pakete suchen mit apt-get</p>
+<pre><code>apt-cache search Suchbegriff1 [Suchbegriff2]
+</code></pre>
+<p>Infos zum Paket anzeigen</p>
+<pre><code>apt-cache show Paketname
+</code></pre>
+<p>Infos zu möglichen Updates anzeigen</p>
+<pre><code>apt-cache policy &lt;package name&gt;
+</code></pre>
+<p>Version eines Pakets anzeigen</p>
+<pre><code>dpkg -s &lt;packagename&gt;
+</code></pre>
+<p>Dateien die zu einem Paket gehören anzeigen</p>
+<pre><code>dpkg -s &lt;packagename&gt;
+</code></pre>
+<p>PPA hinzufügen und Paket daraus installieren</p>
+<pre><code>sudo add-apt-repository ppa:tuxpoldo/btsync
+sudo apt-get update
+sudo apt-get install btsync
+</code></pre>
+<p>PPA wieder entfernen</p>
+<pre><code>sudo add-apt-repository --remove ppa:PPA_Name/ppa
+</code></pre>
+<p>falls add-apt-repository fehlt muss python-software-properties installiert werden</p>
+<pre><code>sudo apt-get install python-software-properties
+</code></pre>
+<p>Alle Paket updaten und den Vorgang loggen (vorher apt-get update)</p>
+<pre><code>sudo apt-get upgrade 2&gt;&amp;1 | tee ~/apt-get.log
+</code></pre>
+<p>Alte Kernel entfernen um Platz in /boot zu schaffen</p>
+<p>Installierte Kernel anzeigen</p>
+<pre><code>dpkg -l | grep linux-image
+</code></pre>
+<p>benutzten Kernel anzeigen</p>
+<pre><code>uname -r
+</code></pre>
+<p>Kernel entfernen</p>
+<pre><code>dpkg --remove linux-image-extra-4.2.0-15-generic
+</code></pre>
+<h4 id=nur-security-updates-installieren>
+nur security updates installieren
+<a class=anchor href=#nur-security-updates-installieren>#</a>
+</h4>
+<p>sudo cp /etc/apt/sources.list /etc/apt/security.sources.list</p>
+<p>Edit the latter to contain only security repositories, then:</p>
+<p>sudo apt-get upgrade -o Dir::Etc::SourceList=/etc/apt/security.sources.list</p>
+<h3 id=programe-per-source-installieren>
+programe per source installieren
+<a class=anchor href=#programe-per-source-installieren>#</a>
+</h3>
+<pre><code>source nach /tmp downloaden
+auspacken meist mit xfv source.tar.gz
+
+./configure
+make
+checkinstall -D make install    ##checkinstall muss ggfs. per apt-get installiert werden und erzeugt ein Paket für das auch eine spätere Deinstallation möglich ist.
+dpkg -i &lt;paketname&gt; ## installiert das Paket
+
+source aus tmp wieder löschen!
+</code></pre>
+<p>###Nicht mehr unterstützte Pakete (LTS) anzeigen</p>
+<p>ubuntu-support-status &ndash;show-unsupported</p>
+<h3 id=startup--initscripte>
+Startup / Initscripte
+<a class=anchor href=#startup--initscripte>#</a>
+</h3>
+<p>Damit ein Service beim hochfahren gestartet wird kann man unter Debian/Ubuntu update-rc.d nutzen. Die Init Scripte liegen unter /etc/init.d über rc1-x werden die Initscripte per symlink verlinkt. Das K(ill) oder S(tart) vor den Scriptnamen und die Zahl legen die Reihenfolge und das hoch- oder runterfahren fest.</p>
+<pre><code># update-rc.d SERVICE-NAME defaults
+</code></pre>
+<p>Um den Service wieder zu entfernen.</p>
+<pre><code># update-rc.d SERVICE-NAME remove
+</code></pre>
+<h3 id=benutzer-anlegenlöschenverwalten>
+Benutzer anlegen/löschen/verwalten
+<a class=anchor href=#benutzer-anlegenl%c3%b6schenverwalten>#</a>
+</h3>
+<pre><code>useradd -m USERNAME -g sudo -s /bin/bash #mit Homeverzeichnis und gleich in die Gruppe sudo
+groups USERNAME #grp eines users anzeigen
+adduser USERNAME GROUP#user in grp adden
+addgroup GROUP #neu Gruppe
+usermod -a username -G sudo # user der gruppe Sudu hinzufügen (visible after next login)
+userdel -r username # User mit seinem Homeverzeichnis löschen
+usermod -d /path/to/new/home -m username #ändert das Homeverzeichnis und kopiert ggfs die Daten aus dem alten
+</code></pre>
+<p>###Dateien verschieben</p>
+<p>scp file to host
+scp SourceFile user@host:directory/TargetFile</p>
+<p>scp folder FROM host
+scp -r user@host:directory/SourceFolder TargetFolder</p>
+<p>#netstat</p>
+<p>offen port mit zugehöriger application
+netstat -lnptu
+routen anzeigen
+netstat -r</p>
+<p>###packen
+tar cvf backup.tar directory
+bzip2 -9 backup.tar
+###auspacken
+bunzip backup.tar.bz2
+tar xfv backup.tar</p>
+<h3 id=möglichkeiten-die-linuxdistro-rausfinden>
+Möglichkeiten die Linuxdistro rausfinden
+<a class=anchor href=#m%c3%b6glichkeiten-die-linuxdistro-rausfinden>#</a>
+</h3>
+<pre><code>cat /etc/*release
+cat /etc/*version
+cat /etc/issue
+cat /proc/version
+getconf LONG_BIT #64 oder 32 bit
+</code></pre>
+<p>###cert request</p>
+<pre><code>openssl req -nodes -newkey rsa:4096 -keyout domainname.key -out domainname.csr
+</code></pre>
+<p>das Keyfile anschließend sofort mit chmod 600 domainname.key schützen und den Inhalt des csr
+unter https://caserver/certsrv in eine cer umwandeln</p>
+<p>Request mit alternate names erzeugt man, indem man ein conf file erstellt. Das sollte so aussehen.</p>
+<p>[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req</p>
+<p>[req_distinguished_name]
+countryName = Country Name (2 letter code)
+countryName_default = DE
+stateOrProvinceName = State or Province Name (full name)
+stateOrProvinceName_default = Hamburg
+localityName = Locality Name (eg, city)
+localityName_default = Hamburg
+organizationalUnitName = Organizational Unit Name (eg, section)
+organizationalUnitName_default = IT
+commonName = commonName (Hostname, etc.)
+commonName_max = 64
+emailAddress = E-Mailaddress
+emailAddress_default = <a href=mailto:yourmailadresse@mail.com>yourmailadresse@mail.com</a>
+emailAddress_max = 40</p>
+<p>[v3_req]
+keyUsage = keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names</p>
+<p>[alt_names]
+DNS.1 = foobar.com
+DNS.2 = foobar
+DNS.3 = secondname.foobar.com
+IP.1 = 192.168.1.100
+IP.2 = 192.168.1.200</p>
+<p>Unter alt_names kann man weitere Namen und IP Adressen hinzufügen. Die Werte unter [req_distinguished_name] müssen nicht unbedingt angepasst werden, da sie beim csr erstellen nochmal abgefragt werden. Dann muss der csr mit dem Configfile erstellt werden:</p>
+<pre><code>openssl req -nodes -newkey rsa:4096 -keyout domainname.key -out domainname.csr -config configfile
+</code></pre>
+<h3 id=zertifikate-konvertieren>
+Zertifikate konvertieren
+<a class=anchor href=#zertifikate-konvertieren>#</a>
+</h3>
+<p>Convert a DER file (.crt .cer .der) to PEM</p>
+<pre><code>openssl x509 -inform der -in certificate.cer -out certificate.pem
+</code></pre>
+<p>Convert a PEM file to DER</p>
+<pre><code>openssl x509 -outform der -in certificate.pem -out certificate.der
+</code></pre>
+<p>Convert a PKCS#12 file (.pfx .p12) containing a private key and certificates to PEM</p>
+<pre><code>openssl pkcs12 -in keyStore.pfx -out keyStore.pem -nodes
+</code></pre>
+<p>You can add -nocerts to only output the private key or add -nokeys to only output the certificates.</p>
+<p>Convert a PEM certificate file and a private key to PKCS#12 (.pfx .p12)</p>
+<pre><code>openssl pkcs12 -export -out certificate.pfx -inkey privateKey.key -in certificate.crt -certfile CACert.crt
+</code></pre>
+<h3 id=zertifikate-auslesen>
+Zertifikate auslesen
+<a class=anchor href=#zertifikate-auslesen>#</a>
+</h3>
+<p>openssl x509 -in yourcert.pem -inform pem -noout -text</p>
+<h3 id=verify-if-key-belongs-to-certificate>
+Verify if key belongs to certificate
+<a class=anchor href=#verify-if-key-belongs-to-certificate>#</a>
+</h3>
+<p>openssl x509 -noout -modulus -in wildcard.domain.net.crt | openssl md5
+1f6485eac12a42c17a778f82105b268e</p>
+<p>openssl rsa -noout -modulus -in wildcard.domain.net.key | openssl md5
+1f6485eac12a42c17a778f82105b268e</p>
+<h3 id=verify-chain-with-openssl>
+verify chain with openssl
+<a class=anchor href=#verify-chain-with-openssl>#</a>
+</h3>
+<p>openssl verify -CAfile RootCert.pem -untrusted Intermediate.pem UserCert.pem</p>
+<h3 id=openssl-encrytion>
+openssl encrytion
+<a class=anchor href=#openssl-encrytion>#</a>
+</h3>
+<p>encrypt</p>
+<p>$ openssl enc -aes-256-cbc -salt -pbkdf2 -iter 100000 -in file.txt -out file.txt.enc</p>
+<p>decrypt</p>
+<p>$ openssl enc -aes-256-cbc -d -in file.txt.enc -out file.txt</p>
+<p>###Ordnergröße sortiert anzeigen im aktuellen Dir
+du -hs * | sort -r</p>
+<p>Ordnergröße aller Unterordner summieren und anzeigen</p>
+<pre><code>du -cksh * |sort -g
+</code></pre>
+<p>Alle großen Dateien über 20MB finden und anzeigen</p>
+<pre><code>find / -type f -size +20000k -exec ls -lh {} \; | awk '{ print $9 &quot;: &quot; $5 }'
+</code></pre>
+<p>###symlink
+ln -s quelle ziel</p>
+<h3 id=tcp-traffic-analyse>
+TCP traffic Analyse
+<a class=anchor href=#tcp-traffic-analyse>#</a>
+</h3>
+<p>traffic from 10.5.2.3 destined for port 3389
+tcpdump -nnvvS and src 10.5.2.3 and dst port 80 and dst 172.20.1.8 -w caputurefile</p>
+<pre><code>sudo tcpdump -nnvvS src 172.20.0.24 -w caputurefile
+sudo tcpdump -nnvvS port 5353
+sudo tcpdump -nnvvS -n arp
+</code></pre>
+<p>-s 0 #für vollständige packete anhängen.</p>
+<h3 id=mysql-service-neu-starten>
+mysql service neu starten
+<a class=anchor href=#mysql-service-neu-starten>#</a>
+</h3>
+<p>falls service mysql restart nicht reicht, um den Prozess neu zu starten ist vielleicht upstart das Problem. Dann hilft</p>
+<p>initctl &ndash;system stop mysql
+initctl &ndash;system start mysql</p>
+<p>###mysql User anlegen</p>
+<pre><code>mysql -u root -p  #einloggen mit dem root user
+</code></pre>
+<p>alle User anzeigen</p>
+<pre><code>select host, user, password from mysql.user;
+</code></pre>
+<p>neuen User anlegen</p>
+<pre><code>CREATE USER 'username'@'localhost' IDENTIFIED BY 'some_pass';
+</code></pre>
+<p>Berechtigungen für den User der auf alle Datenbanken zugreifen kann:</p>
+<pre><code>GRANT ALL PRIVILEGES ON *.* TO 'username'@'localhost' IDENTIFIED BY 'some_pass';
+</code></pre>
+<p>neuen User anlegen der auf eine bestimmte Datenbank zugreifen kann:</p>
+<pre><code>GRANT ALL PRIVILEGES ON dbname.* TO 'username'@'localhost' IDENTIFIED BY 'some_pass';
+</code></pre>
+<p>ALL PRIVILEGES- as we saw previously, this would allow a MySQL user all access to a designated database (or if no database is selected, across the system)
+CREATE- allows them to create new tables or databases
+DROP- allows them to them to delete tables or databases
+DELETE- allows them to delete rows from tables
+INSERT- allows them to insert rows into tables
+SELECT- allows them to use the Select command to read through databases
+UPDATE- allow them to update table rows
+GRANT OPTION- allows them to grant or remove other users privileges</p>
+<p>You can grant multiple privileges in one command by separating them with commas: eg:</p>
+<pre><code>GRANT UPDATE, SELECT ON [database name].[table name] TO ‘[username]’@‘localhost’;
+</code></pre>
+<p>Berechtigungen wieder entziehen</p>
+<pre><code>REVOKE [type of permission] ON [database name].[table name] FROM ‘[username]’@‘localhost’;
+</code></pre>
+<p>reload all permissions</p>
+<pre><code>FLUSH PRIVILEGES;
+</code></pre>
+<p>delete a user</p>
+<pre><code>DROP USER ‘demo’@‘localhost’;
+</code></pre>
+<p>Show all Databases</p>
+<pre><code>show databases;
+</code></pre>
+<p>kaputte mysql Tabelle reparieren</p>
+<pre><code>mysql -uroot -p
+use databasename;
+check table tablename;
+repair table tablename;
+</code></pre>
+<p>Datenbank exportieren</p>
+<pre><code>$ mysqldump --lock-tables database -u USER -p [tables] &gt; database.sql
+</code></pre>
+<p>Datenbank importieren</p>
+<pre><code>$ mysql -p dbname -u USER -p &lt; dumpfile.sql
+</code></pre>
+<p>Datenbank auf anderen host importieren
+$ mysql -P 3310 -h 10.0.0.100 -p dbname -u USER -p &lt; dumpfile.sql</p>
+<p>Datenbank in Container importieren</p>
+<pre><code>$ docker exec -i &lt;Container_ID or Container_Name mysql -u[mysql_user] -p[mysql_user_password] [database] &lt; [database_backup_file.sql]
+</code></pre>
+<p>Ausgabe umleiten 2>&1 (hinter Snagview Checkcommands sehr praktisch)</p>
+<p>###iptables</p>
+<p>#show all Rules with port numbers (exept NAT Rules)</p>
+<pre><code>iptables -L -n
+</code></pre>
+<p>#removes a rule at in a specific chain with a certain line number</p>
+<pre><code>iptables -D INPUT &lt;linenumber&gt;
+</code></pre>
+<p>#accept new mysql connections from a specific ip and insert the rule in third place</p>
+<pre><code>iptables -I INPUT 3 -p tcp -i eth0 -s 172.20.4.17 --dport 3306 -m state --state NEW -j ACCEPT
+</code></pre>
+<h1 id=allows-http-and-https-connections-from-anywhere-the-normal-ports-for-websites>
+Allows HTTP and HTTPS connections from anywhere (the normal ports for websites)
+<a class=anchor href=#allows-http-and-https-connections-from-anywhere-the-normal-ports-for-websites>#</a>
+</h1>
+<pre><code>iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+</code></pre>
+<h1 id=drops-a-traffic-to-port-80-for-a-specific-source-ip>
+Drops a Traffic to port 80 for a specific source ip
+<a class=anchor href=#drops-a-traffic-to-port-80-for-a-specific-source-ip>#</a>
+</h1>
+<pre><code>iptables -A INPUT -p tcp -s &lt;sourceip&gt; --dport 80 -j DROP
+</code></pre>
+<h1 id=removes-this-rule>
+removes this rule
+<a class=anchor href=#removes-this-rule>#</a>
+</h1>
+<pre><code>iptables -D INPUT -p tcp -s &lt;sourceip&gt; --dport 80 -j DROP
+</code></pre>
+<p>iptables speichern:</p>
+<pre><code>sudo sh -c &quot;iptables-save &gt; /etc/iptables.rules&quot;
+</code></pre>
+<p>iptables laden:</p>
+<pre><code>iptables-restore -c &lt; /etc/iptables.rules
+
+
+Basic Rules: (iptables.rules)
+Generated by iptables-save v1.4.12 on Sun Nov 18 21:17:25 2012
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -j DROP
+-A FORWARD -j DROP
+-A OUTPUT -m conntrack --ctstate NEW,RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -j DROP
+COMMIT
+# Completed on Sun Nov 18 21:17:25 2012
+</code></pre>
+<p>to apply iptables on startup: insert this into /etc/network/interfaces</p>
+<pre><code>pre-up iptables-restore &lt; /etc/iptables.rules
+</code></pre>
+<p>script zum iptables sichern</p>
+<pre><code>#!/bin/sh
+sudo sh -c &quot;iptables-save &gt; /etc/iptables.rules&quot;
+STATE=0
+if [ $? -eq 0 ] ;then
+        echo &quot;IPTABLES saved&quot;
+        STATE=1
+else
+        echo &quot;something went wrong&quot;
+fi
+exit $STATE
+</code></pre>
+<h4 id=netools-vs-iproute2-commands>
+netools vs. iproute2 commands
+<a class=anchor href=#netools-vs-iproute2-commands>#</a>
+</h4>
+<p>arp -na ip neigh
+ifconfig ip link
+ifconfig -a ip addr show
+ifconfig -s ip -s link
+ifconfig eth0 up ip link set eth0 up
+ipmaddr ip maddr
+iptunnel ip tunnel</p>
+<p>netstat ss
+netstat -i ip -s link
+netstat -g ip maddr
+netstat -l ss -l
+netstat -r ip route</p>
+<p>route add ip route add
+route del ip route del
+route -n ip route show</p>
+<p>set the ip for eth0 to 172.16.1.1/24</p>
+<pre><code>ifconfig eth0 172.16.1.1/24 up
+
+ip addr add 172.16.1.1/24 dev eth0
+</code></pre>
+<p>set new default route</p>
+<pre><code>route add default gw 192.168.1.254 eth0
+
+ip route add default dev eth0 via 192.168.1.254
+</code></pre>
+<p>add/delete static route</p>
+<pre><code>route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.254
+route del -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.254
+
+ip route add 172.16.29/24 dev eth0
+ip route del 172.16.29/24 dev eth0
+</code></pre>
+<p>auf Routern muss das IP Forwarding aktiviert werden</p>
+<pre><code>sudo sysctl -w net.ipv4.ip_forward=1
+</code></pre>
+<h3 id=key>
+key
+<a class=anchor href=#key>#</a>
+</h3>
+<p>erzeugen</p>
+<pre><code>ssh-keygen -t rsa -b 8192 -f mykeyfile_rsa
+</code></pre>
+<p>ssh key ohne ssh-copy-id deployen</p>
+<pre><code>cat ~/.ssh/id_rsa.pub | ssh username@host &quot;cat – &gt;&gt; ~/.ssh/authorized_keys&quot;
+</code></pre>
+<p>alternativ mit ssh-copy-id</p>
+<pre><code>ssh-copy-id -i ~/.ssh/id_rsa.pub remote-host
+</code></pre>
+<h3 id=shell-magic>
+Shell Magic
+<a class=anchor href=#shell-magic>#</a>
+</h3>
+<p>exitcode des letzten Befehls</p>
+<pre><code>echo $?
+</code></pre>
+<h3 id=cpan>
+CPAN
+<a class=anchor href=#cpan>#</a>
+</h3>
+<p>*aufrufen mit:</p>
+<pre><code>perl -MCPAN -e 'shell'
+</code></pre>
+<p>*Module suchen</p>
+<pre><code>i /Net::SNMP/
+</code></pre>
+<p>*suchen nach dem richtigen Modulnamen und installieren</p>
+<pre><code>install Net::SNMP
+</code></pre>
+<h3 id=package-managment>
+package managment
+<a class=anchor href=#package-managment>#</a>
+</h3>
+<p>show installed packages
+dpkg -l</p>
+<h3 id=rsyslog>
+rsyslog
+<a class=anchor href=#rsyslog>#</a>
+</h3>
+<p>to prevent rsyslog from spamming the syslog change /etc/rsyslog.d/50-default.conf</p>
+<pre><code>*.*;auth,authpriv.none,cron.none,mail.none              -/var/log/syslog
+cron.*							                          /var/log/cron.log
+mail.*                          -/var/log/mail.log
+</code></pre>
+<p>for syslog-ng uncomment this in /etc/syslog-ng/syslog-ng.conf</p>
+<pre><code>destination cron { file(&quot;/var/log/cron&quot;); };
+log { source(src); filter(f_cron); destination(cron); };
+</code></pre>
+<p>and change this line (add cron)</p>
+<pre><code>filter f_messages   { not facility(news, mail,cron) and not filter(f_iptables); };
+</code></pre>
+<p>Don&rsquo;t forget logrotate (/etc/logrotate.d/syslog) or things get ugly</p>
+<p>to forward syslog messages to another syslog-ng insert this into the /etc/syslog-ng/syslog-ng.conf</p>
+<p>destination d_udp514 {udp(&ldquo;loghost&rdquo; port (514));};
+log { source(src); filter(f_messages); destination(messages); destination(d_udp514);};</p>
+<p>for rsyslogd and syslogd add this in /etc/rsyslog.d/50-default.conf or /etc/syslog.conf</p>
+<p><em>.</em> @loggingserverip_or_hostname:514</p>
+<h3 id=dns-server-mit-resolfconf-ändern-ohne-interfaceneustart>
+DNS Server mit resolfconf ändern ohne Interfaceneustart
+<a class=anchor href=#dns-server-mit-resolfconf-%c3%a4ndern-ohne-interfaceneustart>#</a>
+</h3>
+<pre><code>echo &quot;nameserver 8.8.8.8
+search example.com&quot; | sudo resolvconf -a eth0.inet
+</code></pre>
+<p>Damit das dauerhaft greift, muss der DNS Server in /etc/network/interfaces eingetragen sein.</p>
+<pre><code>dns-search example.com
+dns-search-nameservers 8.8.8.8
+</code></pre>
+<h3 id=lvm-mounten>
+LVM mounten
+<a class=anchor href=#lvm-mounten>#</a>
+</h3>
+<p>Install lvm2:
+$ sudo apt-get install lvm2
+Load the necessary module(s):
+$ sudo modprobe dm-mod
+Scan your system for LVM volumes and identify in the output the volume group name that has your Fedora volume (mine proved to be VolGroup00):
+$ sudo vgscan
+Activate the volume:
+$ sudo vgchange -ay VolGroup00
+Find the logical volume that has your Fedora root filesystem (mine proved to be LogVol00):
+$ sudo lvs
+Create a mount point for that volume:
+$ sudo mkdir /mnt/fcroot
+Mount it:
+$ sudo mount /dev/VolGroup00/LogVol00 /mnt/fcroot -o ro,user</p>
+<p>###mit chroot auf andere Platten zugreifen</p>
+<p>Systen z.B. unter /mount/point einbinden</p>
+<pre><code># mount -o bind /proc /mount/point/proc
+# mount -o bind /dev /mount/point/dev
+# mount -o bind /dev/pts /mount/point/dev/pts
+# mount -o bind /sys /mount/point/sys
+</code></pre>
+<p>für DNS Auflösung</p>
+<pre><code># cp /etc/resolv.conf /mount/point/etc/resolv.conf
+</code></pre>
+<p>Shell aufmachen</p>
+<pre><code># chroot /mount/point /bin/bash
+</code></pre>
+<h3 id=rename-an-ubuntu-after-cloning-the-vm>
+rename an ubuntu after cloning the vm
+<a class=anchor href=#rename-an-ubuntu-after-cloning-the-vm>#</a>
+</h3>
+<p>change configs in
+/etc/hostname
+/etc/hosts
+/etc/network/interfaces
+restart the interfaces
+/etc/init.d/networking restart</p>
+<h3 id=insert-new-harddrive-to-vm-with-lvm>
+insert new harddrive to vm with LVM
+<a class=anchor href=#insert-new-harddrive-to-vm-with-lvm>#</a>
+</h3>
+<p>check the lvm and the existing hdds first</p>
+<pre><code>pvdisplay
+fdisk -l
+</code></pre>
+<p>Add the hdd via the vpshere console. The new disk will show up something like this</p>
+<pre><code>&quot;Disk /dev/sdb doesn't contain a valid partition table&quot;
+</code></pre>
+<p>Time to format the new disk and create an LVM Partition. We assume that /dev/sdb is the new drive</p>
+<p>fdisk /dev/sdb
+n
+p
+1
+2x Enter to use the complete disk
+t
+8e (to change the partion to LVM)</p>
+<p>verify the change with &ldquo;p&rdquo;
+Device Boot Start End Blocks Id System
+/dev/sdb1 2048 88080383 44039168 8e Linux LVM</p>
+<p>Write the new partition table with &ldquo;w&rdquo;
+Now create a new LVM physical volume</p>
+<pre><code>pvcreate /dev/sdb1
+</code></pre>
+<p>Now we add the Harddrive to our existing VG (Volume Group)</p>
+<pre><code>vgextend u1404template-vg /dev/sdb1
+</code></pre>
+<p>Next we extent the size of the Logical Volume, by the size of the new HDD (42 GB in this example)</p>
+<p>lvextend -L+42GB /dev/mapper/u1404template&ndash;vg-root</p>
+<p>The last step is to resize the filesysem with</p>
+<p>resize2fs /dev/mapper/u1404template&ndash;vg-root</p>
+<p>Now you should see that the main LV is larger</p>
+<h3 id=insert-new-harddrive-in-a-virtual-server>
+insert new harddrive in a virtual server
+<a class=anchor href=#insert-new-harddrive-in-a-virtual-server>#</a>
+</h3>
+<p>check the drives</p>
+<pre><code> sudo cat /proc/scsi/scsi
+</code></pre>
+<p>to rescan the drives install</p>
+<pre><code>apt-get install scsitools
+</code></pre>
+<p>rescan</p>
+<pre><code>rescan-scsi-bus.sh
+</code></pre>
+<p>recheck the drives</p>
+<pre><code> sudo cat /proc/scsi/scsi
+</code></pre>
+<p>list all hdds</p>
+<pre><code>fdisk -l
+</code></pre>
+<p>oder</p>
+<pre><code>fdisk -l /dev/sdb
+</code></pre>
+<p>Disk /dev/sdb: 1073 MB, 1073741824 bytes
+255 heads, 63 sectors/track, 130 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes</p>
+<p>Disk /dev/sdb doesn&rsquo;t contain a valid partition table</p>
+<p>partion mit fdisk anlegen</p>
+<p>alle Partitionen auf sdb anzeigen
+fdisk /dev/sdb dann p</p>
+<p>neue Partition anlegen</p>
+<p>I start fdisk from the shell prompt:
+fdisk /dev/hdb
+which indicates that I am using the second drive on my IDE controller. (See Section 2.1.) When I print the (empty) partition table, I just get configuration information.</p>
+<pre><code>Command (m for help): p
+
+Disk /dev/hdb: 64 heads, 63 sectors, 621 cylinders
+Units = cylinders of 4032 * 512 bytes
+I knew that I had a 1.2Gb drive, but now I really know: 64 * 63 * 512 * 621 = 1281982464 bytes. I decide to reserve 128Mb of that space for swap, leaving 1153982464. If I use one of my primary partitions for swap, that means I have three left for ext2 partitions. Divided equally, that makes for 384Mb per partition. Now I get to work.
+Command (m for help): n
+Command action
+   e   extended
+   p   primary partition (1-4)
+p
+Partition number (1-4): 1
+First cylinder (1-621, default 1):&lt;RETURN&gt;
+Using default value 1
+Last cylinder or +size or +sizeM or +sizeK (1-621, default 621): +384M
+</code></pre>
+<p>Next, I set up the partition I want to use for swap:</p>
+<pre><code>Command (m for help): n
+Command action
+   e   extended
+   p   primary partition (1-4)
+p
+Partition number (1-4): 2
+First cylinder (197-621, default 197):&lt;RETURN&gt;
+Using default value 197
+Last cylinder or +size or +sizeM or +sizeK (197-621, default 621): +128M
+Now the partition table looks like this:
+   Device Boot    Start       End    Blocks   Id  System
+/dev/hdb1             1       196    395104   83  Linux
+/dev/hdb2           197       262    133056   83  Linux
+</code></pre>
+<p>I set up the remaining two partitions the same way I did the first. Finally, I make the first partition bootable:
+Command (m for help): a
+Partition number (1-4): 1
+And I make the second partition of type swap:
+Command (m for help): t
+Partition number (1-4): 2
+Hex code (type L to list codes): 82
+Changed system type of partition 2 to 82 (Linux swap)
+Command (m for help): p
+The end result:
+Disk /dev/hdb: 64 heads, 63 sectors, 621 cylinders
+Units = cylinders of 4032 * 512 bytes</p>
+<pre><code>   Device Boot    Start       End    Blocks   Id  System
+/dev/hdb1   *         1       196    395104+  83  Linux
+/dev/hdb2           197       262    133056   82  Linux swap
+/dev/hdb3           263       458    395136   83  Linux
+/dev/hdb4           459       621    328608   83  Linux
+</code></pre>
+<p>Finally, I issue the write command (w) to write the table on the disk.</p>
+<p>Platten formatieren z.b. mit</p>
+<pre><code>mkfs.ext3 /dev/sdb1
+</code></pre>
+<p>Eintrag in /etc/fstab machen</p>
+<pre><code>/dev/sdb1       /mountpoint       ext3    defaults        0       2
+</code></pre>
+<h3 id=programm-ohne-sudo-mit-setuid-bit-ausführen>
+programm ohne sudo mit setuid bit ausführen
+<a class=anchor href=#programm-ohne-sudo-mit-setuid-bit-ausf%c3%bchren>#</a>
+</h3>
+<p>Owner muss root sein
+chown root:wheel program</p>
+<p>setuid bit setzen
+chmod u+s program</p>
+<h3 id=smbshares-mounten>
+smbshares mounten
+<a class=anchor href=#smbshares-mounten>#</a>
+</h3>
+<pre><code>sudo apt-get install cifs-utils
+</code></pre>
+<p>On older systems:</p>
+<pre><code>sudo apt-get install smbfs
+</code></pre>
+<p>First, let&rsquo;s create the mount directory. You will need a separate directory for each mount.</p>
+<p>sudo mkdir /media/windowsshare
+Then edit your /etc/fstab file (with root privileges) to add this line:</p>
+<p>//servername/sharename /media/windowsshare cifs guest,uid=1000,iocharset=utf8 0 0
+Where</p>
+<p>guest indicates you don&rsquo;t need a password to access the share,
+uid=1000 makes the Linux user specified by the id the owner of the mounted share, allowing them to rename files,
+iocharset=utf8 allows access to files with names in non-English languages. This doesn&rsquo;t work with shares of devices like the Buffalo Tera Station, or Windows machines that export their shares using ISO8895-15.
+After you add the entry to /etc/fstab type:</p>
+<p>sudo mount -a
+This will (re)mount all entries listed in /etc/fstab.</p>
+<p>The quickest way to auto-mounting a password-protected share is to edit /etc/fstab (with root privileges), to add this line:</p>
+<p>//servername/sharename /media/windowsshare cifs username=msusername,password=mspassword,iocharset=utf8,sec=ntlm 0 0
+This is not a good idea however: /etc/fstab is readable by everyone and so is your Windows password in it. The way around this is to use a credentials file. This is a file that contains just the username and password.</p>
+<p>Using a text editor, create a file for your remote servers logon credential:</p>
+<p>gedit ~/.smbcredentials
+Enter your Windows username and password in the file:</p>
+<p>username=msusername
+password=mspassword
+Save the file, exit the editor.</p>
+<p>Change the permissions of the file to prevent unwanted access to your credentials:</p>
+<p>chmod 600 ~/.smbcredentials
+Then edit your /etc/fstab file (with root privileges) to add this line (replacing the insecure line in the example above, if you added it):</p>
+<p>//servername/sharename /media/windowsshare cifs credentials=/home/ubuntuusername/.smbcredentials,iocharset=utf8,sec=ntlm 0 0
+Save the file, exit the editor.</p>
+<p>Finally, test the fstab entry by issuing:</p>
+<p>sudo mount -a
+If there are no errors, you should test how it works after a reboot. Your remote share should mount automatically.</p>
+<h2 id=nfs-shares>
+nfs shares
+<a class=anchor href=#nfs-shares>#</a>
+</h2>
+<h3 id=nfs-share-mounten>
+nfs share mounten
+<a class=anchor href=#nfs-share-mounten>#</a>
+</h3>
+<pre><code>sudo mount -t nfs host:/share /mountpoint
+</code></pre>
+<h3 id=nfs-share-über-fstab-mounten>
+nfs share über fstab mounten
+<a class=anchor href=#nfs-share-%c3%bcber-fstab-mounten>#</a>
+</h3>
+<pre><code>host:/share   /mountpoint   nfs    rsize=8192,wsize=8192,timeo=14,intr
+</code></pre>
+<h2 id=berechtigungen>
+Berechtigungen
+<a class=anchor href=#berechtigungen>#</a>
+</h2>
+<h1 id=permission-rwx>
+Permission rwx
+<a class=anchor href=#permission-rwx>#</a>
+</h1>
+<p>7 read, write and execute 111
+6 read and write 110
+5 read and execute 101
+4 read only 100
+3 write and execute 011
+2 write only 010
+1 execute only 001
+0 none 000</p>
+<p>$ chmod u=rw,g=rx,o= internalPlan.txt</p>
+<p>/home 700
+./ssh 700
+authorised_key 600
+startupscripte in /etc/init.d/ 755</p>
+<p>Filepermissions oktal anzeigen</p>
+<pre><code>stat -c &quot;%a %A %n&quot; /usr/bin/*
+</code></pre>
+<h2 id=umask-gilt-für-einen-prozess-und-verhindert-filepermissions-beim-anlagen>
+umask gilt für einen Prozess und verhindert Filepermissions beim Anlagen.
+<a class=anchor href=#umask-gilt-f%c3%bcr-einen-prozess-und-verhindert-filepermissions-beim-anlagen>#</a>
+</h2>
+<p>$ umask # display current value
+0022
+$ umask 0077 #set to prevent files from being created with any access by group members or others
+$ umask #display confirms new setting
+0077
+$ umask -S # display symbolically
+u=rwx,g=,o=</p>
+<p>Octal in umask Prevents (if requested)
+7 read, write and execute
+6 read and write
+5 read and execute
+4 read only
+3 write and execute
+2 write only
+1 execute only
+0 no permissions</p>
+<p>umask u-x,g=r,o+w</p>
+<p>user hat kein execute mehr
+group darf nur lesen
+alle dürfen zusätzlich schreiben</p>
+<p>umask a+r
+alle dürfen lesen</p>
+<p>###installing likewise-open</p>
+<pre><code>apt-get install likewise-open
+domainjoin-cli join domainname.local domainadmin
+lwconfig homedirtemplate %H/%U
+lwconfig AssumeDefaultDomain true
+lwconfig RequireMembershipOf domain\\group^name
+lwconfig CacheEntryExpiry 30
+</code></pre>
+<p>Add the following line to /etc/sudoers:</p>
+<pre><code>%group^name ALL=(ALL) ALL
+</code></pre>
+<h3 id=aliase>
+aliase
+<a class=anchor href=#aliase>#</a>
+</h3>
+<pre><code>alias ls='ls -lahn'
+</code></pre>
+<h3 id=user-ausloggen>
+User ausloggen
+<a class=anchor href=#user-ausloggen>#</a>
+</h3>
+<p>Damit werden alle Prozesse des Users administator beendet und er wird damit natürlich auch ausgelogt
+pkill -KILL -u administrator</p>
+<h3 id=user-sperren>
+User sperren
+<a class=anchor href=#user-sperren>#</a>
+</h3>
+<p>Damit ein User sich nicht mehr einloggen kann sperrt man ihn mit passwd</p>
+<pre><code>passwd -l username
+</code></pre>
+<h2 id=netzwerk>
+Netzwerk
+<a class=anchor href=#netzwerk>#</a>
+</h2>
+<h3 id=netzwerkkarten-konfigurieren>
+Netzwerkkarten konfigurieren
+<a class=anchor href=#netzwerkkarten-konfigurieren>#</a>
+</h3>
+<p>in /etc/network/interfaces
+für DCHP</p>
+<pre><code>auto eth0
+iface eth0 inet dhcp
+</code></pre>
+<p>für statische IP</p>
+<pre><code>iface eth0 inet static
+address 192.168.1.2
+netmask 255.255.255.0
+gateway 192.168.1.1
+dns-search domain.local
+dns-nameservers 8.8.8.8 8.8.8.8
+</code></pre>
+<h3 id=videodownload-script>
+videodownload script
+<a class=anchor href=#videodownload-script>#</a>
+</h3>
+<p>#!/bin/zsh
+STATE=0
+target=/var/www/sandmann
+newfilename=sandmann-<code>date +%d-%m-%Y</code>.wmv
+logger starte mplayer capture
+mplayer -dumpstream -dumpfile $target/$newfilename mmsh://85.239.122.162/mk3w-3faw-3rqf-enc0-kika?MSWMExt=.asf &
+sleep 722
+killall mplayer
+exit $STATE</p>
+<h3 id=sqlite3-commands>
+SQLITE3 Commands
+<a class=anchor href=#sqlite3-commands>#</a>
+</h3>
+<p>Open a database</p>
+<pre><code>sqlite3 tablename
+</code></pre>
+<p>Show Tables in this database</p>
+<pre><code>.tables
+</code></pre>
+<p>Show a specific tableschema</p>
+<pre><code>.schema tablename
+</code></pre>
+<p>Show the content of a table</p>
+<pre><code>SELECT * FROM table;
+</code></pre>
+<p>Shows the help</p>
+<pre><code>.help
+</code></pre>
+<h3 id=autocomplete-für-services>
+autocomplete für services
+<a class=anchor href=#autocomplete-f%c3%bcr-services>#</a>
+</h3>
+<p>alle Dienste aus /etc/init.d/ autocompleten (am besten in die .bashrc)</p>
+<pre><code>complete -W &quot;$(ls /etc/init.d/)&quot; service
+</code></pre>
+<h2 id=glance-installieren-httpsgithubcomnicolargoglances>
+Glance installieren (<a href=https://github.com/nicolargo/glances>https://github.com/nicolargo/glances</a>)
+<a class=anchor href=#glance-installieren-httpsgithubcomnicolargoglances>#</a>
+</h2>
+<h3 id=pip-installieren>
+pip installieren
+<a class=anchor href=#pip-installieren>#</a>
+</h3>
+<p>wget <a href=https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py>https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py</a>
+sudo python ez_setup.py
+wget <a href=https://raw.github.com/pypa/pip/master/contrib/get-pip.py>https://raw.github.com/pypa/pip/master/contrib/get-pip.py</a>
+sudo python get-pip.py</p>
+<h3 id=python-dev-installieren-für-psutil-abhängigkeit-wird-von-glance-aufgelöst>
+python-dev installieren für psutil (Abhängigkeit wird von Glance aufgelöst)
+<a class=anchor href=#python-dev-installieren-f%c3%bcr-psutil-abh%c3%a4ngigkeit-wird-von-glance-aufgel%c3%b6st>#</a>
+</h3>
+<p>sudo apt-get install python-dev
+sudo pip install Glances</p>
+<p>sudo pip install psutil (falls psutil doch nicht installiert wurde)</p>
+<h3 id=spezielle-version-eines-pakets-installieren>
+spezielle Version eines Pakets installieren
+<a class=anchor href=#spezielle-version-eines-pakets-installieren>#</a>
+</h3>
+<p>sudo pip install ansible==2.0.0.2</p>
+<h3 id=use---user-python-on-osx-1011-to-bypass-a-rootless-problem-while-upgrading>
+use &ndash;user python on OSX 10.11 to bypass a rootless problem while upgrading
+<a class=anchor href=#use---user-python-on-osx-1011-to-bypass-a-rootless-problem-while-upgrading>#</a>
+</h3>
+<p>pip install &ndash;upgrade setuptools &ndash;user python</p>
+<h3 id=script-das-beim-start-jeder-ssh-session-ausgeführt-wird>
+Script das beim Start jeder SSH Session ausgeführt wird
+<a class=anchor href=#script-das-beim-start-jeder-ssh-session-ausgef%c3%bchrt-wird>#</a>
+</h3>
+<p>/etc/ssh/sshrc</p>
+<p>nützlich z. B. für login</p>
+<h3 id=http-zu-https-forwarden-mit-apache2>
+http zu https forwarden mit Apache2
+<a class=anchor href=#http-zu-https-forwarden-mit-apache2>#</a>
+</h3>
+<p>zuerst: a2enmod rewrite
+ggfs noch: a2enmod ssl</p>
+<pre><code>    RewriteEngine On
+    RewriteCond %{SERVER_PORT} !^443$
+    RewriteRule (.*) https://%{HTTP_HOST}$1 [R=301,L]
+</code></pre>
+<h3 id=seite-mit-htaccess-schützen>
+Seite mit htaccess schützen
+<a class=anchor href=#seite-mit-htaccess-sch%c3%bctzen>#</a>
+</h3>
+<p>Entweder in die Directory Directive im vhost.conf oder in eine .htaccess im jeweiligen Ordner</p>
+<pre><code>AuthName &quot;Sitename or Banner&quot;
+AuthType Basic
+AuthUserFile &quot;/path/to/.htpasswd&quot;
+require valid-user
+</code></pre>
+<h1 id=apt-install-apache2-utils>
+apt install apache2-utils
+<a class=anchor href=#apt-install-apache2-utils>#</a>
+</h1>
+<p>#neues htpasswd file
+htpasswd -c /home/pwww/.htpasswd jerry</p>
+<p>#password für den User jerry ändern
+htpasswd /home/pwww/.htpasswd-users jerry</p>
+<h1 id=tshark>
+tshark
+<a class=anchor href=#tshark>#</a>
+</h1>
+<p>apt install tshark</p>
+<p>sudo usermod -a -G wireshark
+logout/login again</p>
+<p>Filter for TLS versions</p>
+<pre><code>tshark -T fields -e ssl.record.version
+</code></pre>
+<p>0x0300 SSL 3.0
+0x0301 TLS 1.0
+0x0302 TLS 1.1
+0x0303 TLS 1.2</p>
+<p>Filter DNS Querys</p>
+<pre><code>tshark -f &quot;src port 53&quot;
+</code></pre>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#commands-are-in-random-order-execute-at-your-own-risk>Commands are in random order; execute at your own risk</a>
+<ul>
+<li><a href=#setup-ansible-in-venv>setup ansible in venv</a></li>
+<li><a href=#sendmail-testen>Sendmail testen</a></li>
+<li><a href=#in-dateien-suchen>in Dateien suchen</a></li>
+<li><a href=#dateien-suchen>Dateien suchen</a></li>
+<li><a href=#bestimmte-dateienordner-abcd-in-einem-unterverzeichis-löschen>bestimmte dateien/ordner abcd in einem Unterverzeichis löschen</a></li>
+<li><a href=#prozess-in-den-hintergrund-schicken-und-mit-disown-gegen-sighup-schützen-damit-er-weiterläuft-und-man-die-ssh-verbindung-trotzdem-beenden-kann>Prozess in den Hintergrund schicken und mit disown gegen SIGHUP schützen, damit er weiterläuft und man die SSH Verbindung trotzdem beenden kann</a></li>
+<li><a href=#paketverwaltung>Paketverwaltung</a></li>
+<li><a href=#programe-per-source-installieren>programe per source installieren</a></li>
+<li><a href=#startup--initscripte>Startup / Initscripte</a></li>
+<li><a href=#benutzer-anlegenlöschenverwalten>Benutzer anlegen/löschen/verwalten</a></li>
+<li><a href=#möglichkeiten-die-linuxdistro-rausfinden>Möglichkeiten die Linuxdistro rausfinden</a></li>
+<li><a href=#zertifikate-konvertieren>Zertifikate konvertieren</a></li>
+<li><a href=#zertifikate-auslesen>Zertifikate auslesen</a></li>
+<li><a href=#verify-if-key-belongs-to-certificate>Verify if key belongs to certificate</a></li>
+<li><a href=#verify-chain-with-openssl>verify chain with openssl</a></li>
+<li><a href=#openssl-encrytion>openssl encrytion</a></li>
+<li><a href=#tcp-traffic-analyse>TCP traffic Analyse</a></li>
+<li><a href=#mysql-service-neu-starten>mysql service neu starten</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<ul>
+<li></li>
+<li><a href=#key>key</a></li>
+<li><a href=#shell-magic>Shell Magic</a></li>
+<li><a href=#cpan>CPAN</a></li>
+<li><a href=#package-managment>package managment</a></li>
+<li><a href=#rsyslog>rsyslog</a></li>
+<li><a href=#dns-server-mit-resolfconf-ändern-ohne-interfaceneustart>DNS Server mit resolfconf ändern ohne Interfaceneustart</a></li>
+<li><a href=#lvm-mounten>LVM mounten</a></li>
+<li><a href=#rename-an-ubuntu-after-cloning-the-vm>rename an ubuntu after cloning the vm</a></li>
+<li><a href=#insert-new-harddrive-to-vm-with-lvm>insert new harddrive to vm with LVM</a></li>
+<li><a href=#insert-new-harddrive-in-a-virtual-server>insert new harddrive in a virtual server</a></li>
+<li><a href=#programm-ohne-sudo-mit-setuid-bit-ausführen>programm ohne sudo mit setuid bit ausführen</a></li>
+<li><a href=#smbshares-mounten>smbshares mounten</a></li>
+</ul>
+</li>
+<li><a href=#nfs-shares>nfs shares</a>
+<ul>
+<li><a href=#nfs-share-mounten>nfs share mounten</a></li>
+<li><a href=#nfs-share-über-fstab-mounten>nfs share über fstab mounten</a></li>
+</ul>
+</li>
+<li><a href=#berechtigungen>Berechtigungen</a></li>
+</ul>
+<ul>
+<li><a href=#umask-gilt-für-einen-prozess-und-verhindert-filepermissions-beim-anlagen>umask gilt für einen Prozess und verhindert Filepermissions beim Anlagen.</a>
+<ul>
+<li><a href=#aliase>aliase</a></li>
+<li><a href=#user-ausloggen>User ausloggen</a></li>
+<li><a href=#user-sperren>User sperren</a></li>
+</ul>
+</li>
+<li><a href=#netzwerk>Netzwerk</a>
+<ul>
+<li><a href=#netzwerkkarten-konfigurieren>Netzwerkkarten konfigurieren</a></li>
+<li><a href=#videodownload-script>videodownload script</a></li>
+<li><a href=#sqlite3-commands>SQLITE3 Commands</a></li>
+<li><a href=#autocomplete-für-services>autocomplete für services</a></li>
+</ul>
+</li>
+<li><a href=#glance-installieren-httpsgithubcomnicolargoglances>Glance installieren (<a href=https://github.com/nicolargo/glances>https://github.com/nicolargo/glances</a>)</a>
+<ul>
+<li><a href=#pip-installieren>pip installieren</a></li>
+<li><a href=#python-dev-installieren-für-psutil-abhängigkeit-wird-von-glance-aufgelöst>python-dev installieren für psutil (Abhängigkeit wird von Glance aufgelöst)</a></li>
+<li><a href=#spezielle-version-eines-pakets-installieren>spezielle Version eines Pakets installieren</a></li>
+<li><a href=#use---user-python-on-osx-1011-to-bypass-a-rootless-problem-while-upgrading>use &ndash;user python on OSX 10.11 to bypass a rootless problem while upgrading</a></li>
+<li><a href=#script-das-beim-start-jeder-ssh-session-ausgeführt-wird>Script das beim Start jeder SSH Session ausgeführt wird</a></li>
+<li><a href=#http-zu-https-forwarden-mit-apache2>http zu https forwarden mit Apache2</a></li>
+<li><a href=#seite-mit-htaccess-schützen>Seite mit htaccess schützen</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

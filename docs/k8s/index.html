@@ -1,0 +1,407 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="K8S cheatsheet #  Useful tools #  Colorize the output of kubectl. Use kubecolor instead.
+brew install dty1er/tap/kubecolor  htop for k8s. Just run k9s
+brew install derailed/k9s/k9s  Faster context switching between clusters with kubectx
+brew install kubectx  Install #  Install on bare metal (Ubuntu) #  Used guide. Also a good source is this
+$ sudo apt update $ sudo apt install docker.io apt-transport-https curl -y $ sudo systemctl start docker $ sudo systemctl enable docker $ curl -s https://packages.">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="K8S Cheatsheet">
+<meta property="og:description" content="K8S cheatsheet #  Useful tools #  Colorize the output of kubectl. Use kubecolor instead.
+brew install dty1er/tap/kubecolor  htop for k8s. Just run k9s
+brew install derailed/k9s/k9s  Faster context switching between clusters with kubectx
+brew install kubectx  Install #  Install on bare metal (Ubuntu) #  Used guide. Also a good source is this
+$ sudo apt update $ sudo apt install docker.io apt-transport-https curl -y $ sudo systemctl start docker $ sudo systemctl enable docker $ curl -s https://packages.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.om.de/docs/k8s/"><meta property="article:section" content="docs">
+<title>K8S Cheatsheet | Memoirs of a sysadmin</title>
+<link rel=manifest href=/manifest.json>
+<link rel=icon href=/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+<script defer src=/flexsearch.min.js></script>
+<script defer src=/en.search.min.f8d1f028cc09d07e2ab160f8f6576a9ecadcd41b3c48697e514b8a523da27ccb.js integrity="sha256-+NHwKMwJ0H4qsWD49ldqnsrc1Bs8SGl+UUuKUj2ifMs=" crossorigin=anonymous></script>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/><span>Memoirs of a sysadmin</span>
+</a>
+</h2>
+<div class=book-search>
+<input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/>
+<div class="book-search-spinner hidden"></div>
+<ul id=book-search-results></ul>
+</div>
+<ul>
+<li>
+<a href=https://github.com/abuzze target=_blank rel=noopener>
+Github
+</a>
+</li>
+</ul>
+<ul>
+<li><a href=/docs/>Cheatsheets</a>
+<ul>
+<li><a href=/docs/cheat-sheet/>Arduino</a></li>
+<li><a href=/docs/active-directory/>Active Directory</a></li>
+<li><a href=/docs/cisco/>Cisco</a></li>
+<li><a href=/docs/docker/>Docker</a></li>
+<li><a href=/docs/git/>Git</a></li>
+<li><a href=/docs/juniper/>Juniper</a></li>
+<li><a href=/docs/k8s/ class=active>k8s</a></li>
+<li><a href=/docs/linux/>Linux</a></li>
+<li><a href=/docs/lxc/>LXC</a></li>
+<li><a href=/docs/macos/>MacOS</a></li>
+<li><a href=/docs/mongodb/>MongoDB</a></li>
+<li><a href=/docs/python/>Python</a></li>
+<li><a href=/docs/ruby-setup/>Ruby</a></li>
+</ul>
+</li>
+<li><a href=/posts/>Blog</a></li>
+</ul>
+<ul>
+<li>
+<a href=https://themes.gohugo.io/hugo-book/ target=_blank rel=noopener>
+Hugo Themes
+</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>K8S Cheatsheet</strong>
+<label for=toc-control>
+<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#useful-tools>Useful tools</a></li>
+<li><a href=#install>Install</a>
+<ul>
+<li><a href=#install-on-bare-metal-ubuntu>Install on bare metal (Ubuntu)</a></li>
+<li><a href=#metallb>MetalLB</a></li>
+<li><a href=#port-forward>Port-Forward</a></li>
+<li><a href=#labels>Labels</a></li>
+<li><a href=#namespaces>Namespaces</a></li>
+<li><a href=#probes>Probes</a></li>
+<li><a href=#replicacontroller-replicasets-daemonsets-deployments>ReplicaController, ReplicaSets, DaemonSets, Deployments</a></li>
+<li><a href=#jobs-cronjob>Jobs, CronJob</a></li>
+<li><a href=#ingress>Ingress</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=k8s-cheatsheet>
+K8S cheatsheet
+<a class=anchor href=#k8s-cheatsheet>#</a>
+</h1>
+<h2 id=useful-tools>
+Useful tools
+<a class=anchor href=#useful-tools>#</a>
+</h2>
+<p>Colorize the output of kubectl. Use <a href=https://github.com/dty1er/kubecolor>kubecolor</a> instead.</p>
+<pre><code>brew install dty1er/tap/kubecolor
+</code></pre>
+<p>htop for k8s. Just run <a href=https://k9scli.io/>k9s</a></p>
+<pre><code>brew install derailed/k9s/k9s
+</code></pre>
+<p>Faster context switching between clusters with <a href=https://github.com/ahmetb/kubectx>kubectx</a></p>
+<pre><code>brew install kubectx
+</code></pre>
+<h2 id=install>
+Install
+<a class=anchor href=#install>#</a>
+</h2>
+<h3 id=install-on-bare-metal-ubuntu>
+Install on bare metal (Ubuntu)
+<a class=anchor href=#install-on-bare-metal-ubuntu>#</a>
+</h3>
+<p>Used <a href=https://linuxconfig.org/how-to-install-kubernetes-on-ubuntu-20-04-focal-fossa-linux>guide</a>.
+Also a good source is <a href=https://jhooq.com/kubernetes-index/>this</a></p>
+<pre><code>$ sudo apt update
+$ sudo apt install docker.io apt-transport-https curl -y
+$ sudo systemctl start docker
+$ sudo systemctl enable docker
+$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+$ sudo apt-add-repository &quot;deb http://apt.kubernetes.io/ kubernetes-xenial main&quot;
+$ sudo apt install kubeadm kubelet kubectl kubernetes-cni -y
+$ sudo swapoff -a
+</code></pre>
+<p>Disable the swapfile permanently</p>
+<pre><code>$ sudo vim /etc/fstab
+</code></pre>
+<p>Rename the VMs</p>
+<pre><code>$ sudo hostnamectl set-hostname kubernetes-master
+$ sudo hostnamectl set-hostname kubernetes-worker
+
+kubernetes-master:~$ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+kubernetes-master:~$ mkdir -p $HOME/.kube
+kubernetes-master:~$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+kubernetes-master:~$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+kubernetes-master:~$ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubernetes-master:~$ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+kubernetes-master:~$ kubectl get pods --all-namespaces
+
+kubernetes-worker:~$ sudo kubeadm join 192.168.1.220:6443 --token 1exb8s.2t4k3b5syfc3jfmo --discovery-token-ca-cert-hash    sha256:72ad481cee4918cf2314738419356c9a402fb609263adad48c13797d0cba2341
+kubernetes-master:~$ kubectl get nodes
+</code></pre>
+<p>To join a node at a later print, you can print the join code in the master. Don&rsquo;t forget to add sudo to the kubeadm command or you will
+end up <a href=https://jhooq.com/kubernetes-error-execution-phase-preflight-preflight/>here</a>.</p>
+<pre><code>kubeadm token create --print-join-command
+</code></pre>
+<p>Check Component status</p>
+<pre><code>$ kubectl get cs
+NAME                 STATUS    MESSAGE             ERROR
+scheduler            Healthy   ok
+controller-manager   Healthy   ok
+etcd-0               Healthy   {&quot;health&quot;:&quot;true&quot;}
+</code></pre>
+<p>If the controller manager is unhealty > comment the line - &ndash;port=0 in /etc/kubernetes/manifests/kube-controller-manager.yaml and restart k8s.</p>
+<pre><code>systemctl restart kubelet
+</code></pre>
+<h3 id=metallb>
+MetalLB
+<a class=anchor href=#metallb>#</a>
+</h3>
+<p>To access pods, you need a load balancer in front. MetalLB can be created like a service and will automatically assign one
+of the defined ip to this service. Example:</p>
+<pre><code>kubectl expose pod kubia --type=LoadBalancer --name kubia-http --target-port=8080 --port=80
+</code></pre>
+<p>Target-port is the app, the app listens. Port is the outside port of the metalLB.</p>
+<p>Check the &ldquo;external ip&rdquo; via</p>
+<pre><code>kubectl get svc
+kubectl describe kubia-http
+</code></pre>
+<p>The pod, rc or deployment must have a label. You can add one with this command:</p>
+<pre><code>kubectl label pod kubia-manual run=kubia-manual
+</code></pre>
+<p>Read the MetalLB <a href=https://metallb.universe.tf/installation/>Guide</a> first.</p>
+<pre><code>kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.10.2/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.10.2/manifests/metallb.yaml
+</code></pre>
+<p>Change the iprange for the LB in the config.yml</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>v1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>ConfigMap</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>namespace</span>: <span style=color:#ae81ff>metallb-system</span>
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>config</span>
+<span style=color:#f92672>data</span>:
+  <span style=color:#f92672>config</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>    address-pools:
+</span><span style=color:#e6db74>    - name: default
+</span><span style=color:#e6db74>      protocol: layer2
+</span><span style=color:#e6db74>      addresses:
+</span><span style=color:#e6db74>      - 192.168.178.50-192.168.178.100</span>    
+</code></pre></div><p>Apply the config</p>
+<pre><code>kubectl apply -f config.yml
+</code></pre>
+<h3 id=port-forward>
+Port-Forward
+<a class=anchor href=#port-forward>#</a>
+</h3>
+<p>For debugging a port forward can be done, even on the client. This would forward traffic from the client,
+where the command is run on port 8888 to the pod in port 8080.</p>
+<pre><code>kubectl port-forward kubia-manual 8888:8080
+</code></pre>
+<h3 id=labels>
+Labels
+<a class=anchor href=#labels>#</a>
+</h3>
+<p>Get all labels:</p>
+<pre><code>kubectl get po --show-labels
+</code></pre>
+<p>Get specific labels</p>
+<pre><code>kubectl get po -L env
+</code></pre>
+<p>Get all pod with a specific label value</p>
+<pre><code>kubectl get pod -l run=kubia
+</code></pre>
+<p>Get all pod without a specific label</p>
+<pre><code>kubectl get pod -l '!run'
+</code></pre>
+<p>Get all pod without a specific label and value</p>
+<pre><code>kubectl get pod -l 'run!=kubia'
+</code></pre>
+<p>Get all pod with a selector</p>
+<pre><code>kubectl get pod -l 'run in (test,dev,kubia)'
+</code></pre>
+<p>Get all pod without a selector</p>
+<pre><code>kubectl get pod -l 'run notin (test,dev,kubia)'
+</code></pre>
+<p>Add a label to a pod</p>
+<pre><code>kubectl label po kubia-manual creation_method=manual
+</code></pre>
+<p>To use labels and nodeSelectors to schedule pods on a specific not use this the the pods config.</p>
+<pre><code>kubectl label node node3 speed=slow
+</code></pre>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>v1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Pod</span>
+<span style=color:#f92672>metadata</span>:
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>kubia-gpu</span>
+<span style=color:#f92672>spec</span>:
+    <span style=color:#f92672>nodeSelector</span>:
+    <span style=color:#f92672>speed</span>: <span style=color:#e6db74>&#34;slow&#34;</span>
+    <span style=color:#f92672>containers</span>:
+    - <span style=color:#f92672>image</span>: <span style=color:#ae81ff>luksa/kubia</span>
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>kubia</span>
+</code></pre></div><h3 id=namespaces>
+Namespaces
+<a class=anchor href=#namespaces>#</a>
+</h3>
+<p>To create a new namespace:</p>
+<pre><code>kubectl create namespace custom-namespace
+</code></pre>
+<p>New namespace via yaml:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>v1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Namespace</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>custom-namespace</span>
+</code></pre></div><p>Deleting almost all resources in a namespace (pods,rc, service, etc). Does not delete secrets.</p>
+<pre><code>kubectl delete all --all
+</code></pre>
+<h3 id=probes>
+Probes
+<a class=anchor href=#probes>#</a>
+</h3>
+<h4 id=liveness-probe>
+Liveness Probe
+<a class=anchor href=#liveness-probe>#</a>
+</h4>
+<p>A liveness probe checks via http, tcp or exec check if the container is still working and restarts it, if the probe
+fails.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>containers</span>:
+  - <span style=color:#f92672>image</span>: <span style=color:#ae81ff>luksa/kubia-unhealthy</span>
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>kubia</span>
+    <span style=color:#f92672>livenessProbe</span>:
+       <span style=color:#f92672>httpGet</span>:
+       <span style=color:#f92672>path</span>: <span style=color:#ae81ff>/</span>
+       <span style=color:#f92672>port</span>: <span style=color:#ae81ff>8080</span>
+       <span style=color:#f92672>initialDelaySeconds</span>: <span style=color:#ae81ff>15</span> <span style=color:#75715e>## set initial delay to prevent an unwanted restart when the container is created</span>
+</code></pre></div><p>Check if the pod was restarted, because the probe failed. Exit Code 137 and 143 means killed externally.</p>
+<pre><code>kubectl describe pod &lt;podname&gt;
+</code></pre>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>    <span style=color:#f92672>State</span>:          <span style=color:#ae81ff>Running</span>
+      <span style=color:#f92672>Started</span>:      <span style=color:#ae81ff>Sun, 04 Jul 2021 10:52:43 +0200</span>
+    <span style=color:#f92672>Last State</span>:     <span style=color:#ae81ff>Terminated</span>
+      <span style=color:#f92672>Reason</span>:       <span style=color:#ae81ff>Error</span>
+      <span style=color:#f92672>Exit Code</span>:    <span style=color:#ae81ff>137</span>
+      <span style=color:#f92672>Started</span>:      <span style=color:#ae81ff>Sun, 04 Jul 2021 10:50:53 +0200</span>
+      <span style=color:#f92672>Finished</span>:     <span style=color:#ae81ff>Sun, 04 Jul 2021 10:52:41 +0200</span>
+</code></pre></div><h3 id=replicacontroller-replicasets-daemonsets-deployments>
+ReplicaController, ReplicaSets, DaemonSets, Deployments
+<a class=anchor href=#replicacontroller-replicasets-daemonsets-deployments>#</a>
+</h3>
+<p>The ReplicaController is deprecated and can run any number of pods that match a label. The ReplicaSets
+is the successor and can run any number of pods, with different labels. The pods are run randomly and will
+be moved to the next node after 5 minutes if a nodes is down. The DaemonSets ensures that one
+pod is run on each node.</p>
+<h3 id=jobs-cronjob>
+Jobs, CronJob
+<a class=anchor href=#jobs-cronjob>#</a>
+</h3>
+<h4 id=jobs>
+Jobs
+<a class=anchor href=#jobs>#</a>
+</h4>
+<p>Run once tasks. RestartPolicy must be set or the default will restart the job.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>batch/v1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>Job</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>batch-job</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>template</span>:
+    <span style=color:#f92672>metadata</span>:
+      <span style=color:#f92672>labels</span>:
+        <span style=color:#f92672>app</span>: <span style=color:#ae81ff>batch-job</span>
+    <span style=color:#f92672>spec</span>:
+      <span style=color:#75715e># Default is Always, which would restart the job. Switch to Never or OnFailure</span>
+      <span style=color:#f92672>restartPolicy</span>: <span style=color:#ae81ff>OnFailure</span>
+      <span style=color:#f92672>containers</span>:
+      - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>main</span>
+        <span style=color:#f92672>image</span>: <span style=color:#ae81ff>luksa/batch-job</span>
+</code></pre></div><h4 id=cronjobs>
+CronJobs
+<a class=anchor href=#cronjobs>#</a>
+</h4>
+<p>Running a pod at a scheduled time. Cronjobs can overlap.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>apiVersion</span>: <span style=color:#ae81ff>batch/v1beta1</span>
+<span style=color:#f92672>kind</span>: <span style=color:#ae81ff>CronJob</span>
+<span style=color:#f92672>metadata</span>:
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>batch-job-every-fifteen-minutes</span>
+<span style=color:#f92672>spec</span>:
+  <span style=color:#f92672>schedule</span>: <span style=color:#e6db74>&#34;0,15,30,45 * * * *&#34;</span>
+  <span style=color:#f92672>jobTemplate</span>:
+    <span style=color:#f92672>spec</span>:
+      <span style=color:#f92672>template</span>:
+        <span style=color:#f92672>metadata</span>:
+          <span style=color:#f92672>labels</span>:
+            <span style=color:#f92672>app</span>: <span style=color:#ae81ff>periodic-batch-job</span>
+        <span style=color:#f92672>spec</span>:
+          <span style=color:#f92672>restartPolicy</span>: <span style=color:#ae81ff>OnFailure</span>
+          <span style=color:#f92672>containers</span>:
+          - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>main</span>
+            <span style=color:#f92672>image</span>: <span style=color:#ae81ff>luksa/batch-job</span>
+</code></pre></div><h3 id=ingress>
+Ingress
+<a class=anchor href=#ingress>#</a>
+</h3>
+<h4 id=nginx-ingress>
+NGINX Ingress
+<a class=anchor href=#nginx-ingress>#</a>
+</h4>
+<p><a href=https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-manifests/>Baremetal Instructions</a></p>
+<p>Install the Ingress Controller first and then point the LB to the ingress.</p>
+<p>Investigate if this is working <a href=https://vincentlauzon.com/2020/02/11/ingress-rules-in-different-kubernetes-namespaces>https://vincentlauzon.com/2020/02/11/ingress-rules-in-different-kubernetes-namespaces</a></p>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#useful-tools>Useful tools</a></li>
+<li><a href=#install>Install</a>
+<ul>
+<li><a href=#install-on-bare-metal-ubuntu>Install on bare metal (Ubuntu)</a></li>
+<li><a href=#metallb>MetalLB</a></li>
+<li><a href=#port-forward>Port-Forward</a></li>
+<li><a href=#labels>Labels</a></li>
+<li><a href=#namespaces>Namespaces</a></li>
+<li><a href=#probes>Probes</a></li>
+<li><a href=#replicacontroller-replicasets-daemonsets-deployments>ReplicaController, ReplicaSets, DaemonSets, Deployments</a></li>
+<li><a href=#jobs-cronjob>Jobs, CronJob</a></li>
+<li><a href=#ingress>Ingress</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
