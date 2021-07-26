@@ -1,4 +1,4 @@
-baseURL = "https://blog.om.de/"
+baseURL = "https://abuzze.github.io/abuzze"
 languageCode = "en-us"
 title = "Memoirs of a sysadmin"
 theme = "book"
