@@ -18,7 +18,7 @@ Ctrl + t markiert in mc einen einzelnen Eintrag  Prozesse die mit D markiert sin
 <link rel=icon href=/abuzze/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/abuzze/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
 <script defer src=/abuzze/flexsearch.min.js></script>
-<script defer src=/abuzze/en.search.min.4ba514e769f62a4defe4b33afa228610aa532c7cfa4c1f207b5dafaa3eccf47f.js integrity="sha256-S6UU52n2Kk3v5LM6+iKGEKpTLHz6TB8ge12vqj7M9H8=" crossorigin=anonymous></script>
+<script defer src=/abuzze/en.search.min.0607fc6aafdf6cd13f7d036ee3b25ee746ca5b5bfa41b2849a9ec7b2537b57dc.js integrity="sha256-Bgf8aq/fbNE/fQNu47Je50bKW1v6QbKEmp7HslN7V9w=" crossorigin=anonymous></script>
 </head>
 <body dir=ltr>
 <input type=checkbox class="hidden toggle" id=menu-control>
@@ -105,6 +105,7 @@ Hugo Themes
 <li><a href=#zertifikate-auslesen>Zertifikate auslesen</a></li>
 <li><a href=#verify-if-key-belongs-to-certificate>Verify if key belongs to certificate</a></li>
 <li><a href=#verify-chain-with-openssl>verify chain with openssl</a></li>
+<li><a href=#check-the-certificate-on-a-webserver-and-get-the-issuer>check the certificate on a webserver and get the issuer</a></li>
 <li><a href=#openssl-encrytion>openssl encrytion</a></li>
 <li><a href=#tcp-traffic-analyse>TCP traffic Analyse</a></li>
 <li><a href=#mysql-service-neu-starten>mysql service neu starten</a></li>
@@ -426,6 +427,11 @@ verify chain with openssl
 <a class=anchor href=#verify-chain-with-openssl>#</a>
 </h3>
 <p>openssl verify -CAfile RootCert.pem -untrusted Intermediate.pem UserCert.pem</p>
+<h3 id=check-the-certificate-on-a-webserver-and-get-the-issuer>
+check the certificate on a webserver and get the issuer
+<a class=anchor href=#check-the-certificate-on-a-webserver-and-get-the-issuer>#</a>
+</h3>
+<p>curl &ndash;insecure -vvI <a href=https://om.de>https://om.de</a> 2>&1 | awk &lsquo;BEGIN { cert=0 } /^* Server certificate:/ { cert=1 } /^*/ { if (cert) print }&rsquo;</p>
 <h3 id=openssl-encrytion>
 openssl encrytion
 <a class=anchor href=#openssl-encrytion>#</a>
@@ -1172,6 +1178,7 @@ logout/login again</p>
 <li><a href=#zertifikate-auslesen>Zertifikate auslesen</a></li>
 <li><a href=#verify-if-key-belongs-to-certificate>Verify if key belongs to certificate</a></li>
 <li><a href=#verify-chain-with-openssl>verify chain with openssl</a></li>
+<li><a href=#check-the-certificate-on-a-webserver-and-get-the-issuer>check the certificate on a webserver and get the issuer</a></li>
 <li><a href=#openssl-encrytion>openssl encrytion</a></li>
 <li><a href=#tcp-traffic-analyse>TCP traffic Analyse</a></li>
 <li><a href=#mysql-service-neu-starten>mysql service neu starten</a></li>
