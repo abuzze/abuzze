@@ -287,6 +287,11 @@ openssl rsa -noout -modulus -in wildcard.domain.net.key | openssl md5
 
   openssl verify -CAfile RootCert.pem -untrusted Intermediate.pem UserCert.pem
 
+
+### check the certificate on a webserver and get the issuer
+
+  curl --insecure -vvI https://om.de 2>&1 | awk 'BEGIN { cert=0 } /^\* Server certificate:/ { cert=1 } /^\*/ { if (cert) print }'
+
 ### openssl encrytion
 encrypt
 
